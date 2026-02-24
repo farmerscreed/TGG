@@ -59,45 +59,27 @@ export default function RegisterPage() {
 
         const supabase = createClient()
 
-        // Create auth user
-        const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        // Create auth user — profile data is passed as metadata so the
+        // database trigger (handle_new_user) auto-creates user_roles + profiles
+        const { error: signUpError } = await supabase.auth.signUp({
             email: data.email,
             password: data.password,
-            options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+            options: {
+                emailRedirectTo: `${window.location.origin}/auth/callback`,
+                data: {
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    phone: data.phone,
+                    gender: data.gender,
+                    university: data.university,
+                    department: data.department,
+                    year_of_study: data.year_of_study,
+                },
+            },
         })
 
-        if (signUpError || !authData.user) {
-            setError(signUpError?.message ?? 'Registration failed. Please try again.')
-            setLoading(false)
-            return
-        }
-
-        // Create role
-        const { error: roleError } = await supabase.from('user_roles').insert({
-            id: authData.user.id,
-            role: 'participant',
-        })
-
-        if (roleError) {
-            setError('Failed to set up your account. Please contact support.')
-            setLoading(false)
-            return
-        }
-
-        // Create profile
-        const { error: profileError } = await supabase.from('profiles').insert({
-            user_id: authData.user.id,
-            first_name: data.first_name,
-            last_name: data.last_name,
-            phone: data.phone,
-            gender: data.gender,
-            university: data.university,
-            department: data.department,
-            year_of_study: data.year_of_study,
-        })
-
-        if (profileError) {
-            setError('Profile creation failed. Please try again.')
+        if (signUpError) {
+            setError(signUpError.message ?? 'Registration failed. Please try again.')
             setLoading(false)
             return
         }
