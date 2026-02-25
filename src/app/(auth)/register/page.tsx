@@ -85,20 +85,31 @@ export default function RegisterPage() {
 
         setSuccess(true)
         setLoading(false)
-        setTimeout(() => router.push('/participant'), 2000)
+        // Redirect to login after 6 seconds so they can read the message
+        setTimeout(() => router.push('/login'), 6000)
     }
 
     if (success) {
         return (
             <div className="w-full max-w-[440px] mx-auto">
-                <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
-                    <div className="flex justify-center mb-4">
-                        <div className="w-16 h-16 rounded-full bg-[#e8f5e9] flex items-center justify-center">
-                            <CheckCircle2 className="w-8 h-8 text-[#1a5c38]" />
+                <div className="bg-white rounded-2xl shadow-2xl p-8 text-center space-y-4">
+                    <div className="flex justify-center">
+                        <div className="w-20 h-20 rounded-full bg-[#e8f5e9] flex items-center justify-center">
+                            <CheckCircle2 className="w-10 h-10 text-[#1a5c38]" />
                         </div>
                     </div>
-                    <h2 className="text-2xl font-bold text-[#1a1a1a] mb-2">Registration Successful!</h2>
-                    <p className="text-gray-500">Redirecting you to your dashboard…</p>
+                    <div>
+                        <h2 className="text-2xl font-bold text-[#1a1a1a]">Registration Successful!</h2>
+                        <p className="text-gray-500 text-sm mt-1">Welcome to the Campus Eco-Challenge 2026.</p>
+                    </div>
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-left">
+                        <p className="text-sm font-semibold text-amber-800 mb-1">📧 Check your email</p>
+                        <p className="text-xs text-amber-700">
+                            We&apos;ve sent a confirmation link to your email address.
+                            Please click it to verify your account before logging in.
+                        </p>
+                    </div>
+                    <p className="text-xs text-gray-400">Redirecting you to the login page in a few seconds…</p>
                 </div>
             </div>
         )
