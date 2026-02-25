@@ -67,6 +67,13 @@ export async function updateSession(request: NextRequest) {
 
         const role = roleData?.role
 
+        // If no role found at all, send to login to avoid redirect loops
+        if (!role) {
+            const url = request.nextUrl.clone()
+            url.pathname = '/login'
+            return NextResponse.redirect(url)
+        }
+
         const routeRoleMap: Record<string, string[]> = {
             '/admin': ['admin'],
             '/coordinator': ['coordinator'],
@@ -75,7 +82,7 @@ export async function updateSession(request: NextRequest) {
         }
 
         for (const [routePrefix, allowedRoles] of Object.entries(routeRoleMap)) {
-            if (pathname.startsWith(routePrefix) && !allowedRoles.includes(role ?? '')) {
+            if (pathname.startsWith(routePrefix) && !allowedRoles.includes(role)) {
                 const roleRedirects: Record<string, string> = {
                     admin: '/admin',
                     coordinator: '/coordinator',
@@ -83,7 +90,7 @@ export async function updateSession(request: NextRequest) {
                     participant: '/participant',
                 }
                 const url = request.nextUrl.clone()
-                url.pathname = roleRedirects[role ?? 'participant'] ?? '/login'
+                url.pathname = roleRedirects[role] ?? '/login'
                 return NextResponse.redirect(url)
             }
         }
