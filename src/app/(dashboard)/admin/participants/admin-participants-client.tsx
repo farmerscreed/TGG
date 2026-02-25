@@ -6,8 +6,9 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Search, Users } from 'lucide-react'
+import { Search, Users, ChevronRight } from 'lucide-react'
 import { UNIVERSITIES, UNIVERSITY_LABELS } from '@/lib/constants'
+import Link from 'next/link'
 
 interface Participant {
     id: string
@@ -38,14 +39,14 @@ export function AdminParticipantsClient({
             p.profiles?.department?.toLowerCase().includes(q)
         )
         const matchUni = university === 'all' || p.profiles?.university === university
-        return matchName && matchUni
+        return (q === '' || matchName) && matchUni
     })
 
     return (
         <div className="space-y-5">
             <div>
                 <h1 className="text-2xl font-bold text-[#1a1a1a]">Participants</h1>
-                <p className="text-gray-500 text-sm">{filtered.length} of {participants.length} participants</p>
+                <p className="text-gray-500 text-sm">{filtered.length} of {participants.length} registered participants</p>
             </div>
 
             <div className="space-y-3">
@@ -79,22 +80,34 @@ export function AdminParticipantsClient({
                     {filtered.map(p => {
                         const full = `${p.profiles?.first_name ?? ''} ${p.profiles?.last_name ?? ''}`.trim()
                         const initials = full ? full.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : '?'
+                        const uniLabel = UNIVERSITY_LABELS[p.profiles?.university as keyof typeof UNIVERSITY_LABELS] ?? p.profiles?.university ?? '—'
+                        const partType = p.profiles?.participation_type
                         return (
-                            <Card key={p.id}>
-                                <CardContent className="pt-3 pb-3 flex items-center gap-3">
-                                    <Avatar className="w-10 h-10 flex-shrink-0">
-                                        <AvatarFallback className="bg-[#1a5c38] text-white text-sm font-bold">{initials}</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="font-semibold text-sm text-[#1a1a1a]">{full || 'Unknown'}</p>
-                                        <p className="text-xs text-gray-500">{p.profiles?.department} · {p.profiles?.year_of_study}</p>
-                                        <p className="text-xs text-gray-400">{UNIVERSITY_LABELS[p.profiles?.university as keyof typeof UNIVERSITY_LABELS] ?? p.profiles?.university ?? '—'}</p>
-                                    </div>
-                                    <Badge variant="outline" className="text-xs capitalize">
-                                        {p.profiles?.participation_type ?? 'N/A'}
-                                    </Badge>
-                                </CardContent>
-                            </Card>
+                            <Link key={p.id} href={`/admin/participants/${p.id}`}>
+                                <Card className="hover:border-[#1a5c38]/40 hover:shadow-sm transition-all cursor-pointer">
+                                    <CardContent className="pt-3 pb-3 flex items-center gap-3">
+                                        <Avatar className="w-10 h-10 flex-shrink-0">
+                                            <AvatarFallback className="bg-[#1a5c38] text-white text-sm font-bold">{initials}</AvatarFallback>
+                                        </Avatar>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-semibold text-sm text-[#1a1a1a]">{full || 'Unknown'}</p>
+                                            <p className="text-xs text-gray-500">
+                                                {p.profiles?.department ? `${p.profiles.department} · ` : ''}{p.profiles?.year_of_study ?? ''}
+                                            </p>
+                                            <p className="text-xs text-gray-400">{uniLabel}</p>
+                                        </div>
+                                        <div className="flex items-center gap-2 flex-shrink-0">
+                                            <Badge
+                                                variant={partType ? 'secondary' : 'outline'}
+                                                className={`text-xs capitalize ${partType ? 'bg-[#e8f5e9] text-[#1a5c38] border-0' : 'text-gray-400'}`}
+                                            >
+                                                {partType || 'Profile incomplete'}
+                                            </Badge>
+                                            <ChevronRight size={16} className="text-gray-300" />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         )
                     })}
                 </div>
