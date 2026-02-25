@@ -17,7 +17,7 @@ export default async function AdminParticipantsPage({ searchParams }: PageProps)
         .from('user_roles')
         .select(`
       id, created_at,
-      profiles!user_roles_id_fkey(first_name, last_name, phone, gender, department, year_of_study, participation_type, university)
+      profiles(first_name, last_name, phone, gender, department, year_of_study, participation_type, university)
     `)
         .eq('role', 'participant')
         .order('created_at', { ascending: false })

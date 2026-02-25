@@ -59,9 +59,8 @@ export default function RegisterPage() {
 
         const supabase = createClient()
 
-        // Create auth user — profile data is passed as metadata so the
-        // database trigger (handle_new_user) auto-creates user_roles + profiles
-        const { error: signUpError } = await supabase.auth.signUp({
+        // Create auth user — profile data is passed as metadata for the trigger to pick up
+        const { data: authData, error: signUpError } = await supabase.auth.signUp({
             email: data.email,
             password: data.password,
             options: {
@@ -69,20 +68,20 @@ export default function RegisterPage() {
                 data: {
                     first_name: data.first_name,
                     last_name: data.last_name,
-                    phone: data.phone,
-                    gender: data.gender,
                     university: data.university,
-                    department: data.department,
-                    year_of_study: data.year_of_study,
-                },
+                }
             },
         })
 
-        if (signUpError) {
-            setError(signUpError.message ?? 'Registration failed. Please try again.')
+        if (signUpError || !authData.user) {
+            setError(signUpError?.message || 'Failed to create account')
             setLoading(false)
             return
         }
+
+        // We no longer Need to manually insert into profiles/user_roles
+        // because the handle_new_user() trigger handles it automatically
+        // and bypasses RLS issues during initial signup.
 
         setSuccess(true)
         setLoading(false)
