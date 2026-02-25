@@ -13,21 +13,30 @@ export default async function AdminParticipantsPage({ searchParams }: PageProps)
 
     const { university, q } = await searchParams
 
-    let query = supabase
-        .from('user_roles')
-        .select(`
-      id, created_at,
-      profiles(first_name, last_name, phone, gender, department, year_of_study, participation_type, university)
-    `)
-        .eq('role', 'participant')
-        .order('created_at', { ascending: false })
+    // Use the secure RPC function to fetch participants + profiles bypassing RLS loops
+    const { data: participantsData, error } = await supabase
+        .rpc('get_admin_participants')
 
-    if (university && university !== 'all') query = query.eq('profiles.university', university)
-    if (q) {
-        // Search by profile name — handled client-side for now since ilike across join is complex
+    if (error) {
+        console.error('Error fetching participants:', error)
+        return <AdminParticipantsClient participants={[]} currentUniversity={university ?? 'all'} searchQ={q ?? ''} />
     }
 
-    const { data: participants } = await query.limit(200)
+    // Transform the flat table result into the nested structure expected by the client
+    const participants = (participantsData ?? []).map((p: any) => ({
+        id: p.id,
+        created_at: p.created_at,
+        profiles: {
+            first_name: p.first_name,
+            last_name: p.last_name,
+            university: p.university,
+            department: p.department,
+            year_of_study: p.year_of_study,
+            phone: p.phone,
+            gender: p.gender,
+            participation_type: p.participation_type
+        }
+    }))
 
-    return <AdminParticipantsClient participants={(participants ?? []) as unknown as never} currentUniversity={university ?? 'all'} searchQ={q ?? ''} />
+    return <AdminParticipantsClient participants={participants as any} currentUniversity={university ?? 'all'} searchQ={q ?? ''} />
 }
