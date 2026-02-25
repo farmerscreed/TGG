@@ -11,7 +11,6 @@ import { UNIVERSITIES, UNIVERSITY_LABELS } from '@/lib/constants'
 
 interface Participant {
     id: string
-    university: string
     created_at: string
     profiles: {
         first_name: string
@@ -21,6 +20,7 @@ interface Participant {
         department: string
         year_of_study: string
         participation_type: string
+        university: string
     } | null
 }
 
@@ -37,7 +37,7 @@ export function AdminParticipantsClient({
             p.profiles?.last_name?.toLowerCase().includes(q) ||
             p.profiles?.department?.toLowerCase().includes(q)
         )
-        const matchUni = university === 'all' || p.university === university
+        const matchUni = university === 'all' || p.profiles?.university === university
         return matchName && matchUni
     })
 
@@ -88,7 +88,7 @@ export function AdminParticipantsClient({
                                     <div className="flex-1 min-w-0">
                                         <p className="font-semibold text-sm text-[#1a1a1a]">{full || 'Unknown'}</p>
                                         <p className="text-xs text-gray-500">{p.profiles?.department} · {p.profiles?.year_of_study}</p>
-                                        <p className="text-xs text-gray-400">{UNIVERSITY_LABELS[p.university as keyof typeof UNIVERSITY_LABELS] ?? p.university}</p>
+                                        <p className="text-xs text-gray-400">{UNIVERSITY_LABELS[p.profiles?.university as keyof typeof UNIVERSITY_LABELS] ?? p.profiles?.university ?? '—'}</p>
                                     </div>
                                     <Badge variant="outline" className="text-xs capitalize">
                                         {p.profiles?.participation_type ?? 'N/A'}
