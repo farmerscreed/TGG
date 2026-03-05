@@ -418,7 +418,8 @@
             font-family: 'Space Mono', monospace;
             font-size: 0.75rem;
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 1;
+            color: var(--white);
         }
 
         .mtn-logo {
@@ -646,7 +647,7 @@
         }
 
         .about-card h3 {
-            color: var(--tgg-green);
+            color: var(--deep-forest);
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
@@ -661,6 +662,7 @@
             display: flex;
             align-items: flex-start;
             gap: 15px;
+            color: var(--dark-text);
         }
 
         .about-list li:last-child {
@@ -1088,6 +1090,7 @@
         <div id="nav-menu">
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#about-tgg">TGG Foundation</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#prizes">Prizes</a></li>
                 <li><a href="#timeline">Timeline</a></li>
@@ -1124,16 +1127,16 @@
 
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-num">₦1.5M</div>
-                    <div class="stat-label">Total Prizes</div>
+                    <div class="stat-num">40,000+</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">₦1.8M</div>
+                    <div class="stat-label">In Prizes</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">3</div>
                     <div class="stat-label">Universities</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">50+</div>
-                    <div class="stat-label">Teams</div>
                 </div>
             </div>
         </div>
@@ -1142,7 +1145,7 @@
     <!-- Countdown Section -->
     <section class="countdown-section">
         <div class="container">
-            <h2 class="theme-subtitle" style="color: var(--gold);">Submissions Close In</h2>
+            <h2 class="theme-subtitle" style="color: var(--gold);">Submission Deadline</h2>
             <div class="countdown-container">
                 <div class="countdown-box">
                     <div class="countdown-num" id="days">00</div>
@@ -1167,22 +1170,27 @@
     <!-- Universities Section -->
     <section class="section-padding cream-bg" id="universities">
         <div class="container">
-            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">Participating Universities</h2>
+            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">Open To Students At</h2>
+            <p class="text-center" style="margin-bottom: 30px; opacity: 0.8;">Must be a currently enrolled student at
+                one of these institutions to qualify</p>
             <div class="uni-grid fade-up">
                 <div class="uni-card">
                     <div class="uni-logo">UP</div>
                     <h3>University of Port Harcourt</h3>
-                    <p>UNIPORT</p>
+                    <p style="color: var(--tgg-green); font-weight: bold;">UNIPORT</p>
+                    <p>20,000+ Students</p>
                 </div>
                 <div class="uni-card">
                     <div class="uni-logo">RSU</div>
                     <h3>Rivers State University</h3>
-                    <p>RSU</p>
+                    <p style="color: var(--tgg-green); font-weight: bold;">RSU</p>
+                    <p>15,000+ Students</p>
                 </div>
                 <div class="uni-card">
                     <div class="uni-logo">IAUE</div>
                     <h3>Ignatius Ajuru University of Education</h3>
-                    <p>IAUE</p>
+                    <p style="color: var(--tgg-green); font-weight: bold;">IAUE</p>
+                    <p>5,000+ Students</p>
                 </div>
             </div>
         </div>
@@ -1191,29 +1199,35 @@
     <!-- What Is Section -->
     <section class="section-padding cream-bg" id="about">
         <div class="container">
-            <h2 class="theme-subtitle" style="color: var(--tgg-green);">What Is TGG?</h2>
+            <h2 class="theme-subtitle" style="color: var(--tgg-green);">What Is The Eco-Challenge?</h2>
             <div class="what-is-grid fade-up">
                 <div class="what-is-text">
                     <p style="margin-bottom: 20px;">
-                        TGG Campus Eco-Challenge is Nigeria's first university-based environmental innovation
-                        competition, bringing together students from UNIPORT, RSU, and IAUE to develop practical
-                        solutions for campus environmental challenges.
+                        The <strong>TGG Campus Eco-Challenge 2026</strong> is Nigeria's first university-based
+                        environmental innovation competition, organized by <strong>Tilda Goes Green (TGG)
+                            Foundation</strong>, founded by award-winning actress and environmental advocate
+                        <strong>Amb. Matilda Gogo Lambert</strong>. It is proudly supported by MTN.
+                    </p>
+                    <p style="margin-bottom: 20px;">
+                        <strong>Theme:</strong> "From Classroom to Climate Action — Youths Building a Green Rivers
+                        State"
                     </p>
                     <p>
-                        From waste management to energy efficiency, water conservation to biodiversity — we want
-                        YOUR ideas on how to make our campuses more sustainable.
+                        This is not just awareness — it's action. Students will document 200+ real campus environmental
+                        problems and create 200+ designed solutions that universities and partners can actually
+                        implement. It scales: Rivers State 2026 → South-South Region 2027 → National 2028+.
                     </p>
                 </div>
                 <div class="pull-quote">
-                    "The biggest threat to our planet is the belief that someone else will save it." <br>— Robert Swan
+                    "This is not just awareness — it's action. Students will document real problems and design solutions
+                    that can actually be implemented."
                 </div>
             </div>
 
             <div class="ribbon-stat-bar fade-up">
-                <div class="ribbon-stat">3 Universities</div>
-                <div class="ribbon-stat">5 Members/Team</div>
-                <div class="ribbon-stat">₦1.5M in Prizes</div>
-                <div class="ribbon-stat">4 Weeks to Submit</div>
+                <div class="ribbon-stat">200+ Problems to Document</div>
+                <div class="ribbon-stat">200+ Solutions to Design</div>
+                <div class="ribbon-stat">6 Months to Change Your Campus</div>
             </div>
         </div>
     </section>
@@ -1227,6 +1241,13 @@
             </p>
             <div class="judging-grid fade-up">
                 <div class="judging-item">
+                    <h3>Problem Identification <span class="judging-value">20%</span></h3>
+                    <p>How clearly have you identified and defined the environmental problem on your campus?</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-width="20"></div>
+                    </div>
+                </div>
+                <div class="judging-item">
                     <h3>Innovation & Creativity <span class="judging-value">25%</span></h3>
                     <p>How novel and creative is your solution? Does it bring a fresh perspective to the problem?</p>
                     <div class="progress-bar-container">
@@ -1234,24 +1255,24 @@
                     </div>
                 </div>
                 <div class="judging-item">
-                    <h3>Feasibility & Practicality <span class="judging-value">25%</span></h3>
+                    <h3>Feasibility <span class="judging-value">25%</span></h3>
                     <p>Can your solution actually be implemented? Is it realistic given resources and constraints?</p>
                     <div class="progress-bar-container">
                         <div class="progress-bar" data-width="25"></div>
                     </div>
                 </div>
                 <div class="judging-item">
-                    <h3>Environmental Impact <span class="judging-value">25%</span></h3>
+                    <h3>Impact Potential <span class="judging-value">20%</span></h3>
                     <p>What positive environmental outcomes will your solution create? How measurable are they?</p>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" data-width="25"></div>
+                        <div class="progress-bar" data-width="20"></div>
                     </div>
                 </div>
                 <div class="judging-item">
-                    <h3>Presentation Quality <span class="judging-value">25%</span></h3>
+                    <h3>Presentation Quality <span class="judging-value">10%</span></h3>
                     <p>How well did you communicate your solution? Is your proposal clear and compelling?</p>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" data-width="25"></div>
+                        <div class="progress-bar" data-width="10"></div>
                     </div>
                 </div>
             </div>
@@ -1259,13 +1280,90 @@
     </section>
 
     <!-- Theme Section -->
-    <section class="theme-section cream-bg" id="themes">
+    <section class="theme-section dark-bg" id="themes">
         <div class="container text-center">
-            <h2 class="theme-title">THEMES</h2>
-            <p class="theme-subtitle">Choose Your Focus Area</p>
+            <h2 class="theme-title">Waste-to-Wealth</h2>
+            <p class="theme-subtitle">Driving Eco-Innovation on Campus</p>
             <p class="theme-desc">
-                Your solution should address at least one of these critical environmental challenges on your campus
+                Students must look at waste, inefficiency, and pollution on their campus and design wealth-creating,
+                sustainable solutions. Transform what others see as trash into treasure — from recycling initiatives to
+                energy generation, from water management to sustainable products.
             </p>
+        </div>
+    </section>
+
+    <!-- About TGG Foundation -->
+    <section class="section-padding dark-bg" id="about-tgg">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--gold);">About Tilda Goes Green Foundation</h2>
+            <div class="about-split fade-up">
+                <div class="about-card">
+                    <h3 style="color: var(--deep-forest);">Our Story</h3>
+                    <p style="margin-bottom: 20px; color: var(--dark-text);">
+                        <strong>Tilda Goes Green (TGG) Foundation</strong> was founded in 2018 by award-winning actress
+                        and environmental advocate <strong>Amb. Matilda Gogo Lambert</strong>. For over 7 years, we have
+                        been at the forefront of environmental advocacy in Nigeria.
+                    </p>
+                    <p style="margin-bottom: 20px; color: var(--dark-text);">
+                        Our documentary <strong>"Black Creeks"</strong> has received UNEP recognition, making us the
+                        first Nigerian environmental organization to achieve such international acknowledgment.
+                    </p>
+                    <p style="color: var(--dark-text);">
+                        We are proud partners of <strong>INTELS Nigeria Limited</strong> (Nigeria's largest logistics
+                        company) and maintain strong government partnerships with <strong>Rivers State
+                            ministries</strong>. With 1,000+ program graduates, we are scaling our impact: Rivers State
+                        2026 → South-South Region 2027 → National 2028+.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <h3>Our Credentials</h3>
+                    <ul class="about-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>UN UNEP Recognized</strong><br>
+                                "Black Creeks" documentary acknowledged
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>INTELS Partner</strong><br>
+                                Nigeria's largest logistics company
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Rivers State Government Partner</strong><br>
+                                Official ministry partnerships
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>7 Years of Impact</strong><br>
+                                Since 2018
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>1,000+ Graduates</strong><br>
+                                Program alumni
+                            </div>
+                        </li>
+                    </ul>
+                    <div
+                        style="margin-top: 30px; text-align: center; padding: 20px; background: rgba(255,204,0,0.15); border-radius: 8px;">
+                        <span
+                            style="font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 1px; color: var(--dark-text);">Proudly
+                            Supported By</span>
+                        <div style="margin-top: 10px; font-size: 1.5rem; font-weight: bold; color: #000;">
+                            MTN</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1280,8 +1378,8 @@
                         <li>
                             <div class="check-icon">✓</div>
                             <div>
-                                <strong>Win ₦1.5M in prizes</strong><br>
-                                Cash prizes for top 3 teams
+                                <strong>Win up to ₦1,000,000</strong><br>
+                                1st Place + Implementation Support
                             </div>
                         </li>
                         <li>
@@ -1347,37 +1445,31 @@
     <!-- How It Works -->
     <section class="section-padding cream-bg" id="how-it-works">
         <div class="container">
-            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">How It Works</h2>
+            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">How To Participate</h2>
             <div class="steps-grid fade-up">
                 <div class="step-card">
-                    <div class="step-num">1</div>
-                    <h3>Register Your Team</h3>
-                    <p>Form a team of 2-5 students and register through our platform. All team members must be from the same university.</p>
+                    <div class="step-num">01</div>
+                    <h3>Identify The Problem</h3>
+                    <p>Observe and document a specific environmental problem on your campus — waste management,
+                        pollution, energy inefficiency, water issues, biodiversity loss, and more.</p>
                 </div>
                 <div class="step-card">
-                    <div class="step-num">2</div>
-                    <h3>Identify a Problem</h3>
-                    <p>Research environmental challenges on your campus — waste, energy, water, pollution, or biodiversity issues.</p>
+                    <div class="step-num">02</div>
+                    <h3>Research The Causes</h3>
+                    <p>Investigate root causes through data collection, surveys, interviews, and scientific analysis.
+                        Understand the problem deeply before proposing solutions.</p>
                 </div>
                 <div class="step-card">
-                    <div class="step-num">3</div>
-                    <h3>Develop Your Solution</h3>
-                    <p>Create an innovative, practical solution. Use our templates and guidelines to structure your proposal.</p>
+                    <div class="step-num">03</div>
+                    <h3>Design The Solution</h3>
+                    <p>Develop a practical, innovative solution with a clear implementation plan, cost estimate, and
+                        projected impact. Be creative — think waste-to-wealth!</p>
                 </div>
                 <div class="step-card">
-                    <div class="step-num">4</div>
-                    <h3>Submit Your Proposal</h3>
-                    <p>Upload your completed proposal, supporting documents, and any visual materials before the deadline.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">5</div>
-                    <h3>Present to Judges</h3>
-                    <p>Shortlisted teams present their solutions to a panel of judges comprising industry experts and academics.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">6</div>
-                    <h3>Win & implement</h3>
-                    <p>Winners receive prizes and have the opportunity to work with university administration to implement their solutions.</p>
+                    <div class="step-num">04</div>
+                    <h3>Submit Your Entry</h3>
+                    <p>Upload your full project proposal through this portal — text, images, videos, and data all
+                        supported. Don't miss the April 20, 2026 deadline!</p>
                 </div>
             </div>
         </div>
@@ -1386,26 +1478,32 @@
     <!-- Prizes -->
     <section class="section-padding dark-bg" id="prizes">
         <div class="container">
-            <h2 class="theme-subtitle text-center" style="color: var(--gold);">The Rewards</h2>
+            <h2 class="theme-subtitle text-center" style="color: var(--gold);">Win Big. Change Your Campus.</h2>
             <p class="text-center" style="margin-bottom: 40px; opacity: 0.8; font-size: 1.2rem;">
-                Compete for ₦1.5 Million in total prizes
+                Compete for ₦1.8 Million in total prizes
             </p>
             <div class="podium fade-up">
                 <div class="prize-card prize-rank-2">
                     <div class="prize-place">2ND PLACE</div>
-                    <div class="prize-amount">₦400,000</div>
+                    <div class="prize-amount">₦500,000</div>
                     <p>Plus mentorship & certificate</p>
                 </div>
                 <div class="prize-card prize-rank-1">
                     <div class="prize-place">1ST PLACE</div>
-                    <div class="prize-amount">₦750,000</div>
-                    <p>Plus mentorship & certificate</p>
+                    <div class="prize-amount">₦1,000,000</div>
+                    <p>Implementation Support + National Recognition</p>
                 </div>
                 <div class="prize-card prize-rank-3">
                     <div class="prize-place">3RD PLACE</div>
-                    <div class="prize-amount">₦250,000</div>
+                    <div class="prize-amount">₦300,000</div>
                     <p>Plus mentorship & certificate</p>
                 </div>
+            </div>
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="margin-bottom: 20px; opacity: 0.8;"><strong>Top 10 Finalists:</strong> Certificates, Branded
+                    Items, Mentorship</p>
+                <p style="opacity: 0.8;"><strong>All Qualified Entries:</strong> Digital Certificate + Eco-Friendly
+                    Branded Items</p>
             </div>
         </div>
     </section>
@@ -1425,10 +1523,10 @@
                 </div>
                 <div class="timeline-phase">
                     <div class="phase-date">APRIL 2026</div>
-                    <div class="phase-title">4-Week Submission Window</div>
+                    <div class="phase-title">Submission Deadline</div>
                 </div>
                 <div class="timeline-phase">
-                    <div class="phase-date">MAY 2026</div>
+                    <div class="phase-date">APRIL-MAY 2026</div>
                     <div class="phase-title">Judging & Selection</div>
                 </div>
                 <div class="timeline-phase">
@@ -1455,31 +1553,25 @@
                 <div class="faq-item">
                     <div class="faq-q">What kinds of problems should I focus on?</div>
                     <div class="faq-a">Any environmental issue on your campus — waste management, water usage, energy,
-                        pollution, biodiversity, etc.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">What format should my submission be in?</div>
-                    <div class="faq-a">A text write-up plus supporting images, videos, and data uploaded through this
-                        platform. We'll provide templates.</div>
+                        pollution, biodiversity, etc. The theme is "Waste-to-Wealth: Driving Eco-Innovation on Campus."
+                    </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q">Is there a registration fee?</div>
                     <div class="faq-a">No. Registration and submission are completely free.</div>
                 </div>
                 <div class="faq-item">
+                    <div class="faq-q">What format should my submission be in?</div>
+                    <div class="faq-a">Text write-up plus supporting images, videos, and data uploaded through this
+                        portal.</div>
+                </div>
+                <div class="faq-item">
                     <div class="faq-q">When is the deadline?</div>
-                    <div class="faq-a">Submissions close at 11:59 PM on the final day of the submission window. Check the
-                        timeline for exact dates.</div>
+                    <div class="faq-a">April 20, 2026. Register now to get started. The countdown is ticking!</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">How are winners selected?</div>
-                    <div class="faq-a">Winners are selected by a panel of judges based on innovation, feasibility,
-                        environmental impact, and presentation quality.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">What if my idea needs funding to implement?</div>
-                    <div class="faq-a">Top teams will have the opportunity to work with university administration and
-                        sponsors to secure implementation funding.</div>
+                    <div class="faq-q">Where is the Grand Finale held?</div>
+                    <div class="faq-a">Port Harcourt. All finalists will be notified with details.</div>
                 </div>
             </div>
         </div>
@@ -1488,9 +1580,17 @@
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to Make a Difference?</h2>
-            <p>Join hundreds of students creating real environmental change on campus</p>
-            <a href="/register" class="btn btn-gold ripple-btn">Register Your Team Now</a>
+            <h2>Your Campus Has a Problem. You Have the Solution.</h2>
+            <p>Join 40,000+ students. Document real issues. Design real change. Win up to ₦1,000,000.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
+                <a href="/register" class="btn btn-gold ripple-btn">Register Now — It's Free</a>
+                <a href="mailto:Tildagoesgreen@gmail.com" class="btn btn-outline">Contact Us</a>
+            </div>
+            <p style="opacity: 0.8; font-size: 1rem;">
+                <strong>Email:</strong> Tildagoesgreen@gmail.com &nbsp;|&nbsp;
+                <strong>Phone:</strong> 08023561100 &nbsp;|&nbsp;
+                <strong>Website:</strong> www.tildagoesgreen.org
+            </p>
         </div>
     </section>
 
@@ -1499,10 +1599,11 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <div class="footer-brand">TGG Eco-Challenge</div>
+                    <div class="footer-brand">Tilda Goes Green Foundation</div>
                     <p class="footer-brand-desc">
-                        Nigeria's first university environmental innovation competition.
-                        Empowering students to create sustainable solutions for campus challenges.
+                        Founded in 2018 by Amb. Matilda Gogo Lambert, TGG has 7 years of environmental advocacy, 1,000+
+                        program graduates, and UN-recognized "Black Creeks" documentary. Proudly partnered with INTELS
+                        Nigeria Limited and Rivers State Government.
                     </p>
                 </div>
                 <div class="footer-col">
@@ -1515,32 +1616,34 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Resources</h4>
+                    <h4>Register</h4>
                     <div class="footer-links">
                         <a href="/login">Login</a>
                         <a href="/register">Register</a>
                         <a href="#faq">FAQs</a>
+                        <a href="#universities">Universities</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Connect</h4>
                     <div class="footer-social">
-                        <a href="#" class="social-link">𝕏</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">📷</a>
+                        <a href="https://youtube.com/@TildaGoesGreenTV" class="social-link" target="_blank">YT</a>
+                        <a href="https://facebook.com/TildaGoesGreenFoundation" class="social-link"
+                            target="_blank">FB</a>
+                        <a href="https://instagram.com/Tildagoesgreen" class="social-link" target="_blank">IG</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>© 2026 TGG Campus Eco-Challenge. All rights reserved.</span>
-                <span>Proudly supported by MTN Nigeria</span>
+                <span>© 2026 Tilda Goes Green Foundation. All rights reserved.</span>
+                <span>Proudly Supported by MTN</span>
             </div>
         </div>
     </footer>
 
     <script>
         // Countdown Timer
-        const submissionDeadline = new Date('2026-04-30T23:59:59').getTime();
+        const submissionDeadline = new Date('2026-04-20T23:59:59').getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
@@ -1607,7 +1710,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    
+
                     // Animate progress bars
                     if (entry.target.classList.contains('judging-grid')) {
                         entry.target.querySelectorAll('.progress-bar').forEach(bar => {
@@ -1641,19 +1744,19 @@
 
         // Ripple effect for buttons
         document.querySelectorAll('.ripple-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function (e) {
                 const ripple = document.createElement('span');
                 ripple.className = 'ripple';
-                
+
                 const rect = this.getBoundingClientRect();
                 const size = Math.max(rect.width, rect.height);
-                
+
                 ripple.style.width = ripple.style.height = size + 'px';
                 ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
                 ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
-                
+
                 this.appendChild(ripple);
-                
+
                 setTimeout(() => {
                     ripple.remove();
                 }, 600);
