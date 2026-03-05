@@ -5,7 +5,10 @@ export default async function Home() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user) redirect('/login')
+  if (!user) {
+    // Redirect unauthenticated users to the public landing page we just built
+    redirect('/index.html')
+  }
 
   const { data: roleData } = await supabase
     .from('user_roles')
