@@ -161,7 +161,6 @@
             transform: translateY(0);
         }
 
-        /* MORE_CSS_HERE */
         /* Navbar */
         nav {
             position: fixed;
@@ -435,7 +434,133 @@
             font-family: sans-serif;
         }
 
-        /* EVEN_MORE_CSS */
+        /* Judging Criteria */
+        .judging-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .judging-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .judging-item h3 {
+            margin-bottom: 15px;
+            color: var(--deep-forest);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--tgg-green);
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .judging-value {
+            float: right;
+            font-family: 'Space Mono', monospace;
+            color: var(--tgg-green);
+            font-weight: bold;
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            background: linear-gradient(rgba(13, 43, 15, 0.9), rgba(13, 43, 15, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%234CAF50" stroke-width="2" fill="none" opacity="0.2"/></svg>');
+            padding: 80px 0;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown-num {
+            font-family: 'Bebas Neue', display;
+            font-size: 4rem;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        /* Universities */
+        .uni-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .uni-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .uni-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .uni-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--tgg-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Bebas Neue', display;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .uni-card h3 {
+            margin-bottom: 10px;
+            color: var(--deep-forest);
+        }
+
+        .uni-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
         /* What Is Section */
         .what-is-grid {
             display: grid;
@@ -841,7 +966,8 @@
                 border-radius: 0 0 8px 8px;
             }
 
-            .uni-grid {
+            .uni-grid,
+            .judging-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1013,6 +1139,55 @@
         </div>
     </section>
 
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="theme-subtitle" style="color: var(--gold);">Submissions Close In</h2>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-num" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-num" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-num" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-num" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Universities Section -->
+    <section class="section-padding cream-bg" id="universities">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">Participating Universities</h2>
+            <div class="uni-grid fade-up">
+                <div class="uni-card">
+                    <div class="uni-logo">UP</div>
+                    <h3>University of Port Harcourt</h3>
+                    <p>UNIPORT</p>
+                </div>
+                <div class="uni-card">
+                    <div class="uni-logo">RSU</div>
+                    <h3>Rivers State University</h3>
+                    <p>RSU</p>
+                </div>
+                <div class="uni-card">
+                    <div class="uni-logo">IAUE</div>
+                    <h3>Ignatius Ajuru University of Education</h3>
+                    <p>IAUE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- What Is Section -->
     <section class="section-padding cream-bg" id="about">
         <div class="container">
@@ -1030,8 +1205,7 @@
                     </p>
                 </div>
                 <div class="pull-quote">
-                    "The biggest threat to our planet is the belief that someone else will save it." <br>—
-                    Robert Swan
+                    "The biggest threat to our planet is the belief that someone else will save it." <br>— Robert Swan
                 </div>
             </div>
 
@@ -1044,14 +1218,53 @@
         </div>
     </section>
 
+    <!-- Judging Criteria -->
+    <section class="section-padding cream-bg" id="judging">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">How You'll Be Judged</h2>
+            <p class="text-center" style="max-width: 600px; margin: 0 auto 40px;">
+                Your submission will be evaluated based on the following criteria
+            </p>
+            <div class="judging-grid fade-up">
+                <div class="judging-item">
+                    <h3>Innovation & Creativity <span class="judging-value">25%</span></h3>
+                    <p>How novel and creative is your solution? Does it bring a fresh perspective to the problem?</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-width="25"></div>
+                    </div>
+                </div>
+                <div class="judging-item">
+                    <h3>Feasibility & Practicality <span class="judging-value">25%</span></h3>
+                    <p>Can your solution actually be implemented? Is it realistic given resources and constraints?</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-width="25"></div>
+                    </div>
+                </div>
+                <div class="judging-item">
+                    <h3>Environmental Impact <span class="judging-value">25%</span></h3>
+                    <p>What positive environmental outcomes will your solution create? How measurable are they?</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-width="25"></div>
+                    </div>
+                </div>
+                <div class="judging-item">
+                    <h3>Presentation Quality <span class="judging-value">25%</span></h3>
+                    <p>How well did you communicate your solution? Is your proposal clear and compelling?</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-width="25"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Theme Section -->
     <section class="theme-section cream-bg" id="themes">
         <div class="container text-center">
             <h2 class="theme-title">THEMES</h2>
             <p class="theme-subtitle">Choose Your Focus Area</p>
             <p class="theme-desc">
-                Your solution should address at least one of these critical environmental challenges on your
-                campus
+                Your solution should address at least one of these critical environmental challenges on your campus
             </p>
         </div>
     </section>
@@ -1163,7 +1376,7 @@
                 </div>
                 <div class="step-card">
                     <div class="step-num">6</div>
-                    <h3>Win & Implement</h3>
+                    <h3>Win & implement</h3>
                     <p>Winners receive prizes and have the opportunity to work with university administration to implement their solutions.</p>
                 </div>
             </div>
@@ -1326,6 +1539,32 @@
     </footer>
 
     <script>
+        // Countdown Timer
+        const submissionDeadline = new Date('2026-04-30T23:59:59').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = submissionDeadline - now;
+
+            if (distance < 0) {
+                document.querySelector('.countdown-container').innerHTML = '<p style="font-size: 1.5rem;">Submissions Closed</p>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
@@ -1353,7 +1592,6 @@
                     target.scrollIntoView({
                         behavior: 'smooth'
                     });
-                    // Close mobile menu if open
                     navMenu.classList.remove('nav-active');
                 }
             });
@@ -1369,6 +1607,13 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    
+                    // Animate progress bars
+                    if (entry.target.classList.contains('judging-grid')) {
+                        entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                            bar.style.width = bar.dataset.width + '%';
+                        });
+                    }
                 }
             });
         }, observerOptions);
