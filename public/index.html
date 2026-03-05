@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGG Campus Eco-Challenge 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --deep-forest: #0D2B0F;
+            --tgg-green: #1B6B1E;
+            --leaf-green: #4CAF50;
+            --gold: #D4A017;
+            --earth-cream: #F5F0E8;
+            --dark-text: #0A1A0B;
+            --white: #FFFFFF;
+            --mtn-yellow: #FFCC00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--dark-text);
+            background-color: var(--earth-cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sub-headline,
+        .step-num,
+        .stat-num {
+            font-family: 'Bebas Neue', display;
+        }
+
+        .accent,
+        .countdown-label {
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .dark-bg {
+            background-color: var(--deep-forest);
+            color: var(--white);
+        }
+
+        .cream-bg {
+            background-color: var(--earth-cream);
+            color: var(--dark-text);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--dark-text);
+            box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 160, 23, 0.5);
+            background-color: #e6b225;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* MORE_CSS_HERE */
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background-color: rgba(13, 43, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--white);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--tgg-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-cta a {
+            background-color: var(--tgg-green);
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-cta a:hover {
+            background-color: var(--leaf-green);
+        }
+
+        .hamburger {
+            display: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background-color: var(--deep-forest);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(76, 175, 80, 0.1) 0%, rgba(13, 43, 15, 1) 70%);
+            z-index: 1;
+        }
+
+        #particles-stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234CAF50" opacity="0.4"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22l1-2.3A13.85,13.85 0 0,0 20.25,9.45c0.5-2.6 1.75-6.45 1.75-6.45C22,3 17,8 17,8Z"/></svg>') no-repeat center center;
+            background-size: contain;
+            animation: float 15s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-100px) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: textReveal 1s ease forwards 0.3s;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--leaf-green);
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: textReveal 1s ease forwards 0.6s;
+        }
+
+        @keyframes textReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .uni-pills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: textReveal 1s ease forwards 0.9s;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 70px;
+            opacity: 0;
+            animation: textReveal 1s ease forwards 1.2s;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            opacity: 0;
+            animation: textReveal 1s ease forwards 1.5s;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 3rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .sponsor-badge {
+            position: absolute;
+            top: 100px;
+            right: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .sponsor-badge span {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .mtn-logo {
+            width: 40px;
+            height: 40px;
+            background: var(--mtn-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-family: sans-serif;
+        }
+
+        /* EVEN_MORE_CSS */
+        /* What Is Section */
+        .what-is-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .what-is-text {
+            font-size: 1.2rem;
+        }
+
+        .pull-quote {
+            background: var(--white);
+            padding: 40px;
+            border-left: 8px solid var(--tgg-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .ribbon-stat-bar {
+            background: var(--tgg-green);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 10px 30px rgba(27, 107, 30, 0.2);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .ribbon-stat {
+            font-family: 'Bebas Neue', display;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Theme Section */
+        .theme-section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .theme-title {
+            font-size: clamp(4rem, 8vw, 7rem);
+            color: var(--tgg-green);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .theme-subtitle {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .theme-desc {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* About Section */
+        .about-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-card h3 {
+            color: var(--tgg-green);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .about-list {
+            list-style: none;
+        }
+
+        .about-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .about-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--tgg-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Steps Section */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .step-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            background: var(--tgg-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        /* Prizes Section */
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .prize-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            width: 280px;
+        }
+
+        .prize-rank-2 {
+            height: 350px;
+            background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
+        }
+
+        .prize-rank-1 {
+            height: 400px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            transform: scale(1.05);
+        }
+
+        .prize-rank-3 {
+            height: 300px;
+            background: linear-gradient(135deg, #CD7F32 0%, #DEB887 100%);
+        }
+
+        .prize-place {
+            font-family: 'Bebas Neue', display;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .prize-amount {
+            font-family: 'Bebas Neue', display;
+            font-size: 3rem;
+            color: var(--tgg-green);
+            margin-bottom: 10px;
+        }
+
+        .prize-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Timeline */
+        .timeline-scroll {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .timeline-phase {
+            min-width: 300px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .timeline-phase::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 30px;
+            height: 2px;
+            background: var(--tgg-green);
+        }
+
+        .timeline-phase:last-child::before {
+            display: none;
+        }
+
+        .phase-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--tgg-green);
+            margin-bottom: 10px;
+        }
+
+        .phase-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-q {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-a {
+            padding: 0 20px 20px;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--tgg-green) 0%, var(--deep-forest) 100%);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-forest);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand-desc {
+            opacity: 0.7;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-family: 'Bebas Neue', display;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--tgg-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 900px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.8rem;
+            }
+
+            .what-is-grid,
+            .about-split {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .pull-quote {
+                border-left: none;
+                border-top: 8px solid var(--tgg-green);
+                border-radius: 0 0 8px 8px;
+            }
+
+            .uni-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .podium {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .prize-card {
+                width: 100%;
+                max-width: 400px;
+                height: auto !important;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .prize-rank-1 {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .hamburger {
+                display: block;
+                font-size: 1.5rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-stats {
+                gap: 30px;
+            }
+
+            .sponsor-badge {
+                top: auto;
+                bottom: 30px;
+                right: 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                justify-content: center;
+            }
+        }
+
+        /* Mobile Menu Active State */
+        .nav-active {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--deep-forest);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-active .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .nav-active .nav-cta {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="nav-logo">
+            <div class="logo-circle">tgg</div>
+            Campus Eco-Challenge 2026
+        </div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <div id="nav-menu">
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#prizes">Prizes</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="/register" class="btn btn-gold ripple-btn">Register Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div id="particles-stage"></div>
+        <div class="sponsor-badge">
+            <span>Proudly Supported By</span>
+            <div class="mtn-logo">MTN</div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">From Classroom to <br>Climate Action</h1>
+            <h2 class="hero-subtitle">Nigeria's First University Environmental Innovation Competition</h2>
+
+            <div class="uni-pills">
+                <span class="pill">UNIPORT</span>
+                <span class="pill">RSU</span>
+                <span class="pill">IAUE</span>
+            </div>
+
+            <div class="hero-ctas">
+                <a href="/register" class="btn btn-gold">Register Now</a>
+                <a href="#about" class="btn btn-outline">Learn More</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-num">₦1.5M</div>
+                    <div class="stat-label">Total Prizes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">3</div>
+                    <div class="stat-label">Universities</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Teams</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Is Section -->
+    <section class="section-padding cream-bg" id="about">
+        <div class="container">
+            <h2 class="theme-subtitle" style="color: var(--tgg-green);">What Is TGG?</h2>
+            <div class="what-is-grid fade-up">
+                <div class="what-is-text">
+                    <p style="margin-bottom: 20px;">
+                        TGG Campus Eco-Challenge is Nigeria's first university-based environmental innovation
+                        competition, bringing together students from UNIPORT, RSU, and IAUE to develop practical
+                        solutions for campus environmental challenges.
+                    </p>
+                    <p>
+                        From waste management to energy efficiency, water conservation to biodiversity — we want
+                        YOUR ideas on how to make our campuses more sustainable.
+                    </p>
+                </div>
+                <div class="pull-quote">
+                    "The biggest threat to our planet is the belief that someone else will save it." <br>—
+                    Robert Swan
+                </div>
+            </div>
+
+            <div class="ribbon-stat-bar fade-up">
+                <div class="ribbon-stat">3 Universities</div>
+                <div class="ribbon-stat">5 Members/Team</div>
+                <div class="ribbon-stat">₦1.5M in Prizes</div>
+                <div class="ribbon-stat">4 Weeks to Submit</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme Section -->
+    <section class="theme-section cream-bg" id="themes">
+        <div class="container text-center">
+            <h2 class="theme-title">THEMES</h2>
+            <p class="theme-subtitle">Choose Your Focus Area</p>
+            <p class="theme-desc">
+                Your solution should address at least one of these critical environmental challenges on your
+                campus
+            </p>
+        </div>
+    </section>
+
+    <!-- About / Why Participate -->
+    <section class="section-padding dark-bg">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--gold);">Why Participate?</h2>
+            <div class="about-split fade-up">
+                <div class="about-card">
+                    <h3>What's In It For You?</h3>
+                    <ul class="about-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Win ₦1.5M in prizes</strong><br>
+                                Cash prizes for top 3 teams
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Real-world impact</strong><br>
+                                Your solution could be implemented on campus
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Skill development</strong><br>
+                                Build leadership, problem-solving, and presentation skills
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Network with professionals</strong><br>
+                                Connect with industry experts and environmental leaders
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <h3>Who Can Join?</h3>
+                    <ul class="about-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Current students</strong><br>
+                                Enrolled at UNIPORT, RSU, or IAUE
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Teams of 2-5</strong><br>
+                                Work together for greater impact
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Any field of study</strong><br>
+                                Engineering, Sciences, Arts, Business — all welcome
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Passion for change</strong><br>
+                                Must be committed to environmental action
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section-padding cream-bg" id="how-it-works">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--tgg-green);">How It Works</h2>
+            <div class="steps-grid fade-up">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Register Your Team</h3>
+                    <p>Form a team of 2-5 students and register through our platform. All team members must be from the same university.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Identify a Problem</h3>
+                    <p>Research environmental challenges on your campus — waste, energy, water, pollution, or biodiversity issues.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Develop Your Solution</h3>
+                    <p>Create an innovative, practical solution. Use our templates and guidelines to structure your proposal.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Submit Your Proposal</h3>
+                    <p>Upload your completed proposal, supporting documents, and any visual materials before the deadline.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">5</div>
+                    <h3>Present to Judges</h3>
+                    <p>Shortlisted teams present their solutions to a panel of judges comprising industry experts and academics.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">6</div>
+                    <h3>Win & Implement</h3>
+                    <p>Winners receive prizes and have the opportunity to work with university administration to implement their solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prizes -->
+    <section class="section-padding dark-bg" id="prizes">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--gold);">The Rewards</h2>
+            <p class="text-center" style="margin-bottom: 40px; opacity: 0.8; font-size: 1.2rem;">
+                Compete for ₦1.5 Million in total prizes
+            </p>
+            <div class="podium fade-up">
+                <div class="prize-card prize-rank-2">
+                    <div class="prize-place">2ND PLACE</div>
+                    <div class="prize-amount">₦400,000</div>
+                    <p>Plus mentorship & certificate</p>
+                </div>
+                <div class="prize-card prize-rank-1">
+                    <div class="prize-place">1ST PLACE</div>
+                    <div class="prize-amount">₦750,000</div>
+                    <p>Plus mentorship & certificate</p>
+                </div>
+                <div class="prize-card prize-rank-3">
+                    <div class="prize-place">3RD PLACE</div>
+                    <div class="prize-amount">₦250,000</div>
+                    <p>Plus mentorship & certificate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section-padding cream-bg" id="timeline">
+        <div class="container">
+            <h2 class="theme-subtitle" style="color: var(--tgg-green);">Competition Timeline</h2>
+            <div class="timeline-scroll fade-up">
+                <div class="timeline-phase">
+                    <div class="phase-date">MARCH 2026</div>
+                    <div class="phase-title">Planning & Launch</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-date">MARCH 2026</div>
+                    <div class="phase-title">Campus Activations & Awareness</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-date">APRIL 2026</div>
+                    <div class="phase-title">4-Week Submission Window</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-date">MAY 2026</div>
+                    <div class="phase-title">Judging & Selection</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-date">MAY 2026</div>
+                    <div class="phase-title">Grand Finale & Prize Giving</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding dark-bg" id="faq">
+        <div class="container">
+            <h2 class="theme-subtitle text-center" style="color: var(--gold);">Frequently Asked Questions</h2>
+            <div class="faq-list fade-up">
+                <div class="faq-item">
+                    <div class="faq-q">Who can participate?</div>
+                    <div class="faq-a">Any currently enrolled student at UNIPORT, RSU, or IAUE.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Can I enter as a team?</div>
+                    <div class="faq-a">Yes, teams are encouraged. Maximum team size is 5 students.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What kinds of problems should I focus on?</div>
+                    <div class="faq-a">Any environmental issue on your campus — waste management, water usage, energy,
+                        pollution, biodiversity, etc.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What format should my submission be in?</div>
+                    <div class="faq-a">A text write-up plus supporting images, videos, and data uploaded through this
+                        platform. We'll provide templates.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Is there a registration fee?</div>
+                    <div class="faq-a">No. Registration and submission are completely free.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">When is the deadline?</div>
+                    <div class="faq-a">Submissions close at 11:59 PM on the final day of the submission window. Check the
+                        timeline for exact dates.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">How are winners selected?</div>
+                    <div class="faq-a">Winners are selected by a panel of judges based on innovation, feasibility,
+                        environmental impact, and presentation quality.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What if my idea needs funding to implement?</div>
+                    <div class="faq-a">Top teams will have the opportunity to work with university administration and
+                        sponsors to secure implementation funding.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Join hundreds of students creating real environmental change on campus</p>
+            <a href="/register" class="btn btn-gold ripple-btn">Register Your Team Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">TGG Eco-Challenge</div>
+                    <p class="footer-brand-desc">
+                        Nigeria's first university environmental innovation competition.
+                        Empowering students to create sustainable solutions for campus challenges.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#about">About</a>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#prizes">Prizes</a>
+                        <a href="#timeline">Timeline</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <div class="footer-links">
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+                        <a href="#faq">FAQs</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">𝕏</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 TGG Campus Eco-Challenge. All rights reserved.</span>
+                <span>Proudly supported by MTN Nigeria</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('nav-active');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open
+                    navMenu.classList.remove('nav-active');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-up animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Particle animation for hero section
+        function createParticles() {
+            const stage = document.getElementById('particles-stage');
+            const leafCount = 15;
+
+            for (let i = 0; i < leafCount; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDelay = Math.random() * 15 + 's';
+                leaf.style.animationDuration = (10 + Math.random() * 10) + 's';
+                stage.appendChild(leaf);
+            }
+        }
+
+        createParticles();
+
+        // Ripple effect for buttons
+        document.querySelectorAll('.ripple-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+                ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    </script>
+</body>
+
+</html>
