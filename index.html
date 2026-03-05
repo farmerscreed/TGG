@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TGG Campus Eco-Challenge 2026 — Nigeria's First University Environmental Innovation Competition</title>
+<meta name="description" content="Win up to ₦1,000,000. Nigeria's first university environmental innovation competition for students at UNIPORT, RSU, and IAUE. Register free today.">
+<meta property="og:title" content="TGG Campus Eco-Challenge 2026">
+<meta property="og:description" content="Nigeria's first university environmental innovation competition. Win up to ₦1,000,000. Open to 40,000+ students.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=Bebas+Neue&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   RESET & ROOT
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+:root {
+  --deep-forest:  #0D2B0F;
+  --tgg-green:    #1B6B1E;
+  --leaf-green:   #4CAF50;
+  --gold:         #D4A017;
+  --gold-light:   #F0C842;
+  --earth-cream:  #F5F0E8;
+  --dark-text:    #0A1A0B;
+  --white:        #FFFFFF;
+  --mtn-yellow:   #FFCC00;
+  --gold-glow:    rgba(212,160,23,0.45);
+}
+
+body {
+  font-family: 'Lora', serif;
+  color: var(--dark-text);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; }
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes drift {
+  0%   { transform: translateY(110vh) rotate(0deg) translateX(0px);   opacity: 0; }
+  5%   { opacity: 0.55; }
+  50%  { transform: translateY(40vh)  rotate(200deg) translateX(30px); opacity: 0.4; }
+  95%  { opacity: 0.3; }
+  100% { transform: translateY(-80px) rotate(420deg) translateX(-20px); opacity: 0; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes pulseBorder {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(212,160,23,0.55); }
+  50%       { box-shadow: 0 0 0 10px rgba(212,160,23,0); }
+}
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(5); opacity: 0; }
+}
+@keyframes lightRays {
+  0%, 100% { opacity: 0.025; }
+  50%       { opacity: 0.07; }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+@keyframes slideRight {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s cubic-bezier(0.4,0,0.2,1),
+              transform 0.75s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.rd1 { transition-delay: 0.10s; }
+.rd2 { transition-delay: 0.20s; }
+.rd3 { transition-delay: 0.30s; }
+.rd4 { transition-delay: 0.40s; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 34px;
+  border-radius: 5px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--deep-forest);
+  animation: pulseBorder 2.8s infinite;
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px var(--gold-glow);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255,255,255,0.55);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--white);
+  transform: translateY(-3px);
+}
+
+.btn-green {
+  background: var(--leaf-green);
+  color: var(--white);
+}
+.btn-green:hover {
+  background: var(--tgg-green);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(76,175,80,0.4);
+}
+
+/* Ripple on click */
+.btn .rpl {
+  position: absolute;
+  border-radius: 50%;
+  width: 12px; height: 12px;
+  background: rgba(255,255,255,0.45);
+  transform: scale(0);
+  animation: ripple 0.55s ease-out forwards;
+  pointer-events: none;
+  margin-left: -6px; margin-top: -6px;
+}
+
+/* ============================================================
+   SECTION LABEL
+   ============================================================ */
+.sec-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 14px;
+}
+.sec-label-green  { color: var(--leaf-green); }
+.sec-label-gold   { color: var(--gold); }
+.sec-label-muted  { color: rgba(255,255,255,0.5); }
+.sec-label-cream  { color: var(--tgg-green); }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  padding: 22px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+}
+#nav.scrolled {
+  background: var(--deep-forest);
+  padding: 14px 6%;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.35);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+}
+.logo-circle {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--tgg-green);
+  border: 2px solid var(--leaf-green);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 1.05rem;
+  color: var(--white);
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+.logo-text { color: var(--white); line-height: 1.25; }
+.logo-text strong { display: block; font-size: 0.88rem; font-weight: 700; font-family: 'Lora', serif; }
+.logo-text span   { font-size: 0.65rem; opacity: 0.65; font-family: 'Space Mono', monospace; letter-spacing: 0.5px; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 30px;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.8px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--leaf-green); }
+.nav-links .btn   { padding: 10px 22px; font-size: 0.68rem; }
+
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none;
+  cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 25px; height: 2px;
+  background: var(--white);
+  transition: transform 0.3s, opacity 0.3s;
+  border-radius: 2px;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile overlay */
+.mob-menu {
+  position: fixed; inset: 0;
+  background: var(--deep-forest);
+  z-index: 899;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 36px;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.mob-menu.open { transform: translateX(0); }
+.mob-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem; color: var(--white);
+  transition: color 0.2s;
+}
+.mob-menu a:hover { color: var(--leaf-green); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  min-height: 100vh;
+  background: var(--deep-forest);
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 130px 6% 90px;
+  overflow: hidden;
+}
+
+/* Ambient light blobs */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 55%, rgba(27,107,30,0.32) 0%, transparent 100%),
+    radial-gradient(ellipse 55% 45% at 85% 25%, rgba(76,175,80,0.14) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 35% at 60% 85%, rgba(13,43,15,0.7)  0%, transparent 100%);
+  z-index: 0; pointer-events: none;
+}
+
+/* Light rays overlay */
+#hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -50deg,
+    transparent, transparent 88px,
+    rgba(76,175,80,0.025) 88px,
+    rgba(76,175,80,0.025) 90px
+  );
+  animation: lightRays 9s ease-in-out infinite;
+  z-index: 0; pointer-events: none;
+}
+
+/* Leaf particles container */
+.hero-leaves {
+  position: absolute; inset: 0;
+  overflow: hidden; z-index: 1;
+  pointer-events: none;
+}
+.leaf {
+  position: absolute;
+  bottom: -60px;
+  opacity: 0;
+  animation: drift linear infinite;
+}
+.leaf svg { width: 100%; height: 100%; }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 920px;
+}
+
+/* MTN badge */
+.mtn-badge {
+  position: absolute;
+  top: 100px; right: 6%;
+  background: var(--mtn-yellow);
+  color: var(--dark-text);
+  padding: 9px 18px;
+  border-radius: 7px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 1.2px;
+  text-align: center;
+  z-index: 3;
+  animation: fadeIn 1s ease 0.4s both;
+  line-height: 1.5;
+}
+.mtn-badge .mtn-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 3px;
+  display: block; line-height: 1;
+  margin-bottom: 2px;
+}
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--leaf-green);
+  margin-bottom: 22px;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 7.5vw, 6.5rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.0;
+  margin-bottom: 26px;
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+.hero-h1 em {
+  color: var(--leaf-green);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-family: 'Lora', serif;
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  color: rgba(255,255,255,0.78);
+  max-width: 640px;
+  margin: 0 auto 34px;
+  line-height: 1.8;
+  animation: fadeUp 0.8s ease 0.58s both;
+}
+
+.hero-pills {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 10px;
+  margin-bottom: 42px;
+  animation: fadeUp 0.8s ease 0.72s both;
+}
+.pill {
+  background: rgba(76,175,80,0.12);
+  border: 1px solid rgba(76,175,80,0.35);
+  color: var(--white);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 1px;
+}
+.pill strong { color: var(--leaf-green); }
+
+.hero-ctas {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; flex-wrap: wrap;
+  animation: fadeUp 0.8s ease 0.86s both;
+  margin-bottom: 64px;
+}
+
+/* Stat counters */
+.hero-stats {
+  display: flex; align-items: stretch; justify-content: center;
+  flex-wrap: wrap;
+  width: 100%; max-width: 680px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 42px;
+  animation: fadeUp 0.8s ease 1s both;
+}
+.h-stat {
+  flex: 1; min-width: 130px;
+  text-align: center; padding: 0 28px;
+}
+.h-stat + .h-stat { border-left: 1px solid rgba(255,255,255,0.12); }
+.h-stat .n {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.9rem; color: var(--gold); line-height: 1;
+}
+.h-stat .l {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 5px;
+}
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+.sec { padding: 104px 6%; }
+.sec-cream { background: var(--earth-cream); }
+.sec-dark  { background: var(--deep-forest); }
+.sec-black { background: #080f08; }
+.container { max-width: 1180px; margin: 0 auto; }
+
+.sec-hd {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.sec-title-white { color: var(--white); }
+.sec-title-dark  { color: var(--dark-text); }
+
+.sec-intro {
+  font-family: 'Lora', serif;
+  font-size: 1.05rem; line-height: 1.75;
+  max-width: 620px; margin: 0 auto;
+}
+.sec-intro-muted { color: rgba(255,255,255,0.6); }
+.sec-intro-dark  { color: #4a5a4b; }
+
+/* Diagonal clip helpers */
+.clip-top-right {
+  clip-path: polygon(0 0, 100% 3%, 100% 100%, 0 97%);
+  padding-top: 130px; padding-bottom: 130px;
+}
+
+/* ============================================================
+   SECTION 3 — WHAT IS ECO-CHALLENGE
+   ============================================================ */
+#what { background: var(--earth-cream); padding: 104px 6%; }
+
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.what-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800; color: var(--dark-text);
+  margin-bottom: 24px; line-height: 1.15;
+}
+.what-text h2 em { color: var(--tgg-green); font-style: italic; }
+.what-text p {
+  font-size: 1.02rem; line-height: 1.88;
+  color: #2d402e; margin-bottom: 18px;
+}
+
+.pullquote {
+  background: var(--tgg-green);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 44px 40px;
+  position: relative; overflow: hidden;
+}
+.pullquote::before {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 9rem; font-weight: 900;
+  color: rgba(255,255,255,0.08);
+  position: absolute; top: -28px; left: 18px;
+  line-height: 1; pointer-events: none;
+}
+.pullquote blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.22rem; font-style: italic;
+  line-height: 1.7; position: relative; z-index: 1;
+  margin-bottom: 22px;
+}
+.pullquote cite {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 2px;
+  text-transform: uppercase; opacity: 0.65;
+  font-style: normal;
+}
+
+/* Stat ribbon */
+.stat-ribbon {
+  display: flex; flex-wrap: wrap;
+  background: var(--tgg-green);
+  border-radius: 10px; overflow: hidden;
+  max-width: 1100px; margin: 56px auto 0;
+}
+.sr-item {
+  flex: 1; min-width: 180px;
+  text-align: center;
+  padding: 30px 20px;
+}
+.sr-item + .sr-item { border-left: 1px solid rgba(255,255,255,0.18); }
+.sr-item .n {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.3rem; color: var(--gold);
+}
+.sr-item .l {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.63rem; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ============================================================
+   SECTION 4 — THEME
+   ============================================================ */
+#theme {
+  background: var(--deep-forest);
+  padding: 120px 6%;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+#theme::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(27,107,30,0.38) 0%, transparent 70%);
+  pointer-events: none;
+}
+.theme-kicker {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4.5rem, 13vw, 11rem);
+  color: var(--white);
+  line-height: 0.88;
+  position: relative; z-index: 1;
+  letter-spacing: 2px;
+}
+.theme-kicker span { color: var(--gold); }
+.theme-dash {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 2.1rem);
+  color: rgba(255,255,255,0.65);
+  margin: 18px 0 52px;
+  position: relative; z-index: 1;
+}
+.theme-body {
+  font-family: 'Lora', serif;
+  font-size: 1.08rem; line-height: 1.9;
+  color: rgba(255,255,255,0.78);
+  max-width: 700px; margin: 0 auto 52px;
+  position: relative; z-index: 1;
+}
+
+/* Decorative SVG ring */
+.theme-ring {
+  position: relative; z-index: 1;
+  opacity: 0.35;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+.theme-ring svg { width: 90px; height: 90px; }
+
+/* ============================================================
+   SECTION 5 — STEPS
+   ============================================================ */
+#steps { background: var(--earth-cream); padding: 104px 6%; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px; max-width: 1100px; margin: 0 auto;
+}
+.step-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 50px 42px;
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(76,175,80,0.14);
+  transition: transform 0.32s, box-shadow 0.32s;
+}
+.step-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--tgg-green), var(--leaf-green));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.step-card:hover::before { transform: scaleX(1); }
+.step-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 22px 55px rgba(13,43,15,0.11);
+}
+
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5.5rem; color: var(--gold);
+  line-height: 1; margin-bottom: 14px;
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.step-num.vis { opacity: 1; transform: translateY(0); }
+
+.step-icon {
+  margin-bottom: 20px;
+}
+.step-icon svg {
+  width: 46px; height: 46px;
+  stroke: var(--tgg-green); fill: none;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+.step-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.42rem; font-weight: 700;
+  color: var(--dark-text); margin-bottom: 13px;
+}
+.step-card p {
+  font-size: 0.97rem; line-height: 1.78;
+  color: #4a5a4b;
+}
+
+/* ============================================================
+   SECTION 6 — JUDGING
+   ============================================================ */
+#judging { background: var(--deep-forest); padding: 104px 6%; }
+
+.criteria { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+.crit { display: flex; flex-direction: column; gap: 11px; }
+.crit-top { display: flex; justify-content: space-between; align-items: baseline; }
+.crit-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.06rem; font-weight: 700; color: var(--white);
+}
+.crit-pct {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem; color: var(--gold);
+}
+.prog-track {
+  height: 7px; background: rgba(255,255,255,0.1);
+  border-radius: 4px; overflow: hidden;
+}
+.prog-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--tgg-green), var(--leaf-green));
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============================================================
+   SECTION 7 — PRIZES
+   ============================================================ */
+#prizes { background: #060d06; padding: 104px 6%; text-align: center; position: relative; overflow: hidden; }
+#prizes::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 95%, rgba(212,160,23,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.podium {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 18px; flex-wrap: wrap;
+  max-width: 920px; margin: 0 auto 56px;
+}
+.p-card {
+  flex: 1; min-width: 220px; max-width: 290px;
+  border-radius: 12px; padding: 42px 28px;
+  text-align: center; position: relative;
+  transition: transform 0.32s, box-shadow 0.32s;
+  cursor: default;
+}
+.p-card:hover { transform: translateY(-9px); }
+
+.p-silver {
+  background: linear-gradient(165deg, #1a2c1c 0%, #0e1a0f 100%);
+  border: 1px solid rgba(190,190,210,0.22);
+}
+.p-gold {
+  background: linear-gradient(165deg, #2a1f00 0%, #1a1300 100%);
+  border: 2px solid var(--gold);
+  margin-bottom: 32px;
+  box-shadow: 0 0 50px rgba(212,160,23,0.15);
+}
+.p-gold:hover { box-shadow: 0 24px 70px rgba(212,160,23,0.38); }
+.p-bronze {
+  background: linear-gradient(165deg, #1e1a0d 0%, #0f0e08 100%);
+  border: 1px solid rgba(190,140,80,0.22);
+}
+
+.p-medal { font-size: 3rem; display: block; margin-bottom: 10px; }
+.p-place {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 3.5px; font-size: 1rem;
+  color: rgba(255,255,255,0.45); margin-bottom: 18px;
+}
+.p-amount {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem; font-weight: 900;
+  background: linear-gradient(120deg, #D4A017 0%, #F0C842 45%, #D4A017 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  transition: background-position 0.4s;
+}
+.p-card:hover .p-amount { animation: shimmer 1.6s linear infinite; }
+
+.p-perks { display: flex; flex-direction: column; gap: 7px; margin-top: 4px; }
+.p-perk {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.5);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 7px;
+}
+
+.prizes-sub {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px; max-width: 820px; margin: 0 auto;
+}
+.prizes-sub .sub-prize:last-child {
+  grid-column: 1 / -1;
+}
+.sub-prize {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 9px; padding: 28px;
+  text-align: left;
+}
+.sub-prize .sp-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.63rem; letter-spacing: 2.5px;
+  color: var(--leaf-green); text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+.sub-prize p { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.65; }
+
+/* ============================================================
+   SECTION 8 — COUNTDOWN
+   ============================================================ */
+#countdown {
+  background: var(--tgg-green);
+  padding: 104px 6%; text-align: center;
+  position: relative; overflow: hidden;
+}
+#countdown::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(76,175,80,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cd-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 4px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+  margin-bottom: 10px; position: relative; z-index: 1;
+}
+.cd-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.9rem);
+  font-weight: 800; color: var(--white);
+  margin-bottom: 50px; position: relative; z-index: 1;
+}
+.timer {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; flex-wrap: wrap;
+  margin-bottom: 20px; position: relative; z-index: 1;
+}
+.t-block {
+  background: rgba(13,43,15,0.55);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px; padding: 28px 34px;
+  min-width: 118px; text-align: center;
+  backdrop-filter: blur(8px);
+}
+.t-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4.2rem; color: var(--white);
+  line-height: 1; display: block;
+}
+.t-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 3.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  display: block; margin-top: 6px;
+}
+.t-sep {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem; color: rgba(255,255,255,0.35);
+  line-height: 1; padding-bottom: 22px;
+}
+.cd-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  margin-bottom: 34px; position: relative; z-index: 1;
+}
+
+/* ============================================================
+   SECTION 9 — UNIVERSITIES
+   ============================================================ */
+#universities { background: var(--earth-cream); padding: 104px 6%; }
+
+.uni-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 24px; max-width: 980px; margin: 0 auto;
+}
+.uni-card {
+  background: var(--white);
+  border-radius: 12px; padding: 44px 28px;
+  text-align: center;
+  border: 2px solid transparent;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.uni-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--tgg-green), var(--leaf-green));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.uni-card:hover::after { transform: scaleX(1); }
+.uni-card:hover {
+  border-color: rgba(76,175,80,0.4);
+  transform: translateY(-7px);
+  box-shadow: 0 20px 50px rgba(13,43,15,0.1);
+}
+.uni-abbr {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem; color: var(--tgg-green);
+  display: block; margin-bottom: 8px;
+}
+.uni-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--dark-text); margin-bottom: 14px;
+  line-height: 1.35;
+}
+.uni-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  color: var(--leaf-green);
+}
+.uni-note {
+  text-align: center; font-style: italic;
+  font-size: 0.9rem; color: #6a7a6b;
+  margin-top: 32px; max-width: 980px; margin-left: auto; margin-right: auto;
+}
+
+/* ============================================================
+   SECTION 10 — ABOUT TGG
+   ============================================================ */
+#about { background: var(--deep-forest); padding: 104px 6%; }
+
+.about-grid {
+  display: grid; grid-template-columns: 1.25fr 1fr;
+  gap: 80px; align-items: start;
+  max-width: 1100px; margin: 0 auto;
+}
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800; color: var(--white);
+  margin-bottom: 26px; line-height: 1.2;
+}
+.about-text p {
+  font-size: 0.99rem; line-height: 1.88;
+  color: rgba(255,255,255,0.73); margin-bottom: 18px;
+}
+.about-text strong { color: var(--white); }
+
+.founder-row {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 34px; padding-top: 26px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.founder-av {
+  width: 58px; height: 58px; border-radius: 50%;
+  background: var(--tgg-green); border: 2px solid var(--leaf-green);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--white); font-weight: 700; flex-shrink: 0;
+}
+.founder-row strong { display: block; font-family: 'Playfair Display', serif; color: var(--white); font-size: 1rem; }
+.founder-row span   { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.8px; color: var(--leaf-green); }
+
+.cred-list { display: flex; flex-direction: column; gap: 14px; }
+.cred-item {
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 9px; padding: 17px 20px;
+  display: flex; align-items: center; gap: 14px;
+  transition: background 0.25s, border-color 0.25s;
+}
+.cred-item:hover {
+  background: rgba(76,175,80,0.1);
+  border-color: rgba(76,175,80,0.28);
+}
+.cred-em { font-size: 1.5rem; flex-shrink: 0; }
+.cred-item strong {
+  display: block; font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.8px;
+  color: var(--white); margin-bottom: 3px;
+}
+.cred-item span { font-size: 0.8rem; color: rgba(255,255,255,0.52); }
+
+.mtn-row {
+  text-align: center; margin-top: 64px; padding-top: 42px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  max-width: 1100px; margin-left: auto; margin-right: auto;
+}
+.mtn-row-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 3.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+.mtn-big {
+  display: inline-block;
+  background: var(--mtn-yellow); color: var(--dark-text);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem; letter-spacing: 6px;
+  padding: 12px 42px; border-radius: 8px;
+}
+
+/* ============================================================
+   SECTION 11 — TIMELINE
+   ============================================================ */
+#timeline { background: var(--earth-cream); padding: 104px 6%; }
+
+.tl-scroll { overflow-x: auto; padding-bottom: 16px; }
+.tl-track {
+  display: flex; align-items: flex-start;
+  min-width: 860px; padding-top: 68px;
+  position: relative;
+}
+.tl-track::before {
+  content: '';
+  position: absolute; top: 28px; left: 5%; right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--tgg-green), var(--leaf-green));
+}
+.tl-phase { flex: 1; text-align: center; padding: 0 14px; position: relative; }
+.tl-dot {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--tgg-green); border: 3px solid var(--leaf-green);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px; position: relative; z-index: 1;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--white);
+}
+.tl-month {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--tgg-green);
+  display: block; margin-bottom: 8px;
+}
+.tl-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.97rem; font-weight: 700;
+  color: var(--dark-text); margin-bottom: 8px;
+}
+.tl-desc { font-size: 0.8rem; color: #6a7a6b; line-height: 1.55; }
+
+/* ============================================================
+   SECTION 12 — FAQ
+   ============================================================ */
+#faq { background: var(--deep-forest); padding: 104px 6%; }
+
+.faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+details.fq {
+  background: rgba(255,255,255,0.048);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 9px; overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
+}
+details.fq[open] {
+  background: rgba(76,175,80,0.08);
+  border-color: rgba(76,175,80,0.28);
+}
+details.fq summary {
+  padding: 22px 28px;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.02rem; font-weight: 700;
+  color: var(--white); list-style: none; user-select: none;
+}
+details.fq summary::-webkit-details-marker { display: none; }
+details.fq summary::after {
+  content: '+';
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem; color: var(--leaf-green);
+  flex-shrink: 0; transition: transform 0.3s; line-height: 1;
+  margin-left: 20px;
+}
+details.fq[open] summary::after { transform: rotate(45deg); }
+.fq-ans {
+  padding: 0 28px 24px;
+  font-size: 0.96rem; line-height: 1.82;
+  color: rgba(255,255,255,0.68);
+}
+.fq-ans strong { color: var(--gold); }
+
+/* ============================================================
+   SECTION 13 — FINAL CTA
+   ============================================================ */
+#cta {
+  background: linear-gradient(140deg, var(--tgg-green) 0%, var(--deep-forest) 100%);
+  padding: 124px 6%; text-align: center;
+  position: relative; overflow: hidden;
+}
+#cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 50% at 15% 55%, rgba(76,175,80,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 40% at 85% 40%, rgba(212,160,23,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+  font-weight: 900; color: var(--white);
+  line-height: 1.08; margin-bottom: 20px;
+  max-width: 820px; margin-left: auto; margin-right: auto;
+  position: relative; z-index: 1;
+}
+.cta-sub {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem; color: rgba(255,255,255,0.78);
+  max-width: 580px; margin: 0 auto 48px;
+  line-height: 1.8; position: relative; z-index: 1;
+}
+.cta-btns {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 50px; position: relative; z-index: 1;
+}
+.cta-contacts {
+  display: flex; align-items: center; justify-content: center;
+  gap: 28px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.cc-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; color: rgba(255,255,255,0.65);
+}
+.cc-item a { color: rgba(255,255,255,0.65); transition: color 0.2s; }
+.cc-item a:hover { color: var(--leaf-green); }
+.cc-item svg { flex-shrink: 0; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer { background: #050b05; padding: 64px 6% 0; }
+.footer-inner {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 60px; max-width: 1100px; margin: 0 auto;
+  padding-bottom: 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.ft-brand .logo-circle { margin-bottom: 18px; }
+.ft-tagline {
+  font-style: italic; font-size: 0.88rem;
+  color: rgba(255,255,255,0.45); line-height: 1.65;
+  max-width: 280px;
+}
+.ft-col h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 3.5px;
+  text-transform: uppercase; color: var(--leaf-green);
+  margin-bottom: 22px;
+}
+.ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.ft-col a {
+  color: rgba(255,255,255,0.55); font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.ft-col a:hover { color: var(--leaf-green); }
+
+.social-row { display: flex; gap: 12px; }
+.soc-btn {
+  width: 44px; height: 44px; border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.58);
+  transition: background 0.22s, color 0.22s, border-color 0.22s;
+}
+.soc-btn:hover {
+  background: var(--tgg-green); color: var(--white);
+  border-color: var(--tgg-green);
+}
+
+.footer-bar {
+  max-width: 1100px; margin: 0 auto;
+  padding: 24px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.ft-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; color: rgba(255,255,255,0.27);
+}
+.ft-mtn {
+  display: flex; align-items: center; gap: 9px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; color: rgba(255,255,255,0.27);
+}
+.ft-mtn-badge {
+  background: var(--mtn-yellow); color: var(--dark-text);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem; letter-spacing: 2px;
+  padding: 3px 11px; border-radius: 3px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 960px) {
+  .what-grid   { grid-template-columns: 1fr; gap: 44px; }
+  .about-grid  { grid-template-columns: 1fr; gap: 52px; }
+  .uni-grid    { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .prizes-sub  { grid-template-columns: 1fr; }
+  .podium      { flex-direction: column; align-items: center; }
+  .p-gold      { margin-bottom: 0; }
+  .p-card      { max-width: 100%; width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .nav-links   { display: none; }
+  .hamburger   { display: flex; }
+  .mtn-badge   { top: 80px; right: 4%; }
+  .sec         { padding: 80px 5%; }
+  .steps-grid  { grid-template-columns: 1fr; }
+  .h-stat .n   { font-size: 2.2rem; }
+  .t-num       { font-size: 3.2rem; }
+  .t-block     { min-width: 90px; padding: 20px 18px; }
+  .t-sep       { font-size: 2.4rem; }
+  .uni-grid    { grid-template-columns: 1fr; max-width: 360px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+  .sr-item + .sr-item { border-left: none; border-top: 1px solid rgba(255,255,255,0.18); }
+}
+
+@media (max-width: 480px) {
+  .hero-ctas, .cta-btns { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 310px; justify-content: center; }
+  .cta-contacts { flex-direction: column; gap: 14px; }
+  .h-stat { padding: 0 14px; }
+  .mtn-badge { display: none; }
+  .hero-h1 { font-size: clamp(2.5rem, 11vw, 3.5rem); }
+  .what-text h2 { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+}
+
+/* ============================================================
+   FUTURISTIC DESIGN ENHANCEMENTS
+   ============================================================ */
+
+/* Animated gradient border on hero eyebrow */
+.hero-eyebrow {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+.hero-eyebrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--leaf-green), transparent);
+  animation: scanLine 3s ease-in-out infinite;
+}
+@keyframes scanLine {
+  0%,100% { width: 40px; opacity: 0.5; }
+  50%      { width: 120px; opacity: 1; }
+}
+
+/* Glassmorphism on scrolled navbar */
+#nav.scrolled {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(13,43,15,0.92) !important;
+  border-bottom: 1px solid rgba(76,175,80,0.15);
+}
+
+/* Neon glow on hero stat numbers */
+.h-stat .n {
+  text-shadow: 0 0 20px rgba(212,160,23,0.4);
+}
+
+/* Futuristic section title underline */
+.sec-title::after {
+  content: '';
+  display: block;
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--leaf-green), var(--gold));
+  border-radius: 2px;
+  margin: 14px auto 0;
+  transition: width 0.5s ease;
+}
+.sec-hd:hover .sec-title::after { width: 88px; }
+.sec-title-dark::after { background: linear-gradient(90deg, var(--tgg-green), var(--leaf-green)); }
+
+/* Glassmorphism step cards */
+.step-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.97) !important;
+}
+
+/* Glowing border on step card hover */
+.step-card:hover {
+  border-color: rgba(76,175,80,0.4) !important;
+  box-shadow: 0 22px 55px rgba(13,43,15,0.14), 0 0 0 1px rgba(76,175,80,0.25) !important;
+}
+
+/* Dot-grid pattern for dark sections */
+#theme, #judging, #prizes, #faq, #about {
+  background-image: radial-gradient(rgba(76,175,80,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+#theme    { background-color: var(--deep-forest); }
+#judging  { background-color: var(--deep-forest); }
+#prizes   { background-color: #060d06; }
+#faq      { background-color: var(--deep-forest); }
+#about    { background-color: var(--deep-forest); }
+
+/* Glowing prize card on first place */
+.p-gold {
+  box-shadow: 0 0 50px rgba(212,160,23,0.18), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+.p-gold:hover {
+  box-shadow: 0 28px 80px rgba(212,160,23,0.42), 0 0 0 1px rgba(212,160,23,0.4) !important;
+}
+
+/* Futuristic timer blocks */
+.t-block {
+  background: rgba(6,15,6,0.7) !important;
+  border: 1px solid rgba(76,175,80,0.28) !important;
+  box-shadow: inset 0 1px 0 rgba(76,175,80,0.1), 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.t-num {
+  text-shadow: 0 0 24px rgba(255,255,255,0.3);
+}
+
+/* Glowing university cards */
+.uni-card:hover {
+  box-shadow: 0 20px 50px rgba(13,43,15,0.14), 0 0 0 2px rgba(76,175,80,0.3) !important;
+}
+
+/* Futuristic credential badges */
+.cred-item:hover {
+  box-shadow: 0 0 0 1px rgba(76,175,80,0.35), 0 8px 24px rgba(13,43,15,0.2);
+}
+
+/* MTN badge premium glow */
+.mtn-badge {
+  box-shadow: 0 4px 20px rgba(255,204,0,0.35);
+}
+.mtn-big {
+  box-shadow: 0 4px 24px rgba(255,204,0,0.3);
+  letter-spacing: 5px;
+}
+
+/* Futuristic animated scan line for hero */
+@keyframes heroScan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+.hero-scan {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(76,175,80,0.18) 30%, rgba(76,175,80,0.35) 50%, rgba(76,175,80,0.18) 70%, transparent 100%);
+  animation: heroScan 8s linear infinite;
+  z-index: 1; pointer-events: none;
+}
+
+/* CTA section futuristic grid lines */
+#cta {
+  background-image:
+    linear-gradient(140deg, var(--tgg-green) 0%, var(--deep-forest) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(76,175,80,0.04) 60px, rgba(76,175,80,0.04) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(76,175,80,0.04) 60px, rgba(76,175,80,0.04) 61px);
+  background-blend-mode: normal, overlay, overlay;
+}
+
+/* Pull quote glow */
+.pullquote {
+  box-shadow: 0 20px 60px rgba(27,107,30,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* Stat ribbon shine */
+.stat-ribbon {
+  box-shadow: 0 8px 40px rgba(27,107,30,0.3);
+  position: relative; overflow: hidden;
+}
+.stat-ribbon::before {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: shinePass 5s ease-in-out infinite;
+}
+@keyframes shinePass {
+  0%   { left: -100%; }
+  50%,100% { left: 160%; }
+}
+
+/* Hero CTA gold button — stronger pulse */
+.btn-gold {
+  box-shadow: 0 6px 28px rgba(212,160,23,0.4);
+}
+
+/* FAQ futuristic hover */
+details.fq[open] {
+  box-shadow: 0 0 0 1px rgba(76,175,80,0.3), 0 8px 32px rgba(13,43,15,0.2);
+}
+
+/* ============================================================
+   MOBILE — PIXEL-PERFECT OVERRIDES
+   ============================================================ */
+
+/* Core mobile base */
+@media (max-width: 768px) {
+  /* Increase base text */
+  body { font-size: 15px; }
+
+  /* Hero perfectly centered at all mobile widths */
+  #hero { padding: 110px 20px 70px; text-align: center; }
+  .hero-h1 { font-size: clamp(2.6rem, 10vw, 3.8rem); letter-spacing: -0.5px; }
+  .hero-sub { font-size: 1rem; padding: 0 4px; }
+  .hero-eyebrow { font-size: 0.62rem; letter-spacing: 3px; }
+  .hero-pills { gap: 8px; }
+  .pill { font-size: 0.62rem; padding: 7px 14px; }
+
+  /* Stats row stacks gracefully */
+  .hero-stats { gap: 0; padding-top: 32px; }
+  .h-stat { padding: 0 16px; min-width: 90px; }
+  .h-stat .n { font-size: 2rem; }
+  .h-stat .l { font-size: 0.58rem; }
+
+  /* Sections */
+  .sec { padding: 72px 20px; }
+  .sec-hd { margin-bottom: 44px; }
+  .sec-title { font-size: clamp(1.75rem, 6.5vw, 2.4rem); }
+  .sec-title::after { margin: 12px auto 0; }
+
+  /* Timer fully responsive */
+  .timer { gap: 8px; }
+  .t-block { min-width: 72px; padding: 16px 12px; border-radius: 10px; }
+  .t-num { font-size: 2.6rem; }
+  .t-lbl { font-size: 0.52rem; letter-spacing: 2px; margin-top: 4px; }
+  .t-sep { font-size: 2rem; padding-bottom: 16px; }
+  .cd-title { font-size: clamp(1.5rem, 6vw, 2.2rem); margin-bottom: 36px; }
+
+  /* Steps single column */
+  .steps-grid { grid-template-columns: 1fr; gap: 20px; }
+  .step-card { padding: 36px 28px; }
+  .step-num { font-size: 4.5rem; }
+  .step-card h3 { font-size: 1.25rem; }
+
+  /* Criteria */
+  .criteria { gap: 24px; }
+  .crit-name { font-size: 0.96rem; }
+  .crit-pct { font-size: 1.5rem; }
+
+  /* Prizes podium — mobile stack */
+  .podium { flex-direction: column; align-items: center; gap: 14px; }
+  .p-gold { margin-bottom: 0; order: -1; }
+  .p-card { max-width: 100%; width: 100%; min-width: unset; }
+  .p-amount { font-size: 2.2rem; }
+  .prizes-sub { grid-template-columns: 1fr; gap: 14px; }
+
+  /* About grid */
+  .about-grid { grid-template-columns: 1fr; gap: 44px; }
+
+  /* Universities */
+  .uni-grid { grid-template-columns: 1fr; max-width: 100%; gap: 14px; }
+  .uni-card { padding: 32px 24px; }
+  .uni-abbr { font-size: 2.6rem; }
+
+  /* FAQ */
+  details.fq summary { padding: 18px 20px; font-size: 0.96rem; }
+  .fq-ans { padding: 0 20px 20px; font-size: 0.92rem; }
+
+  /* Footer */
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+  .footer-bar { flex-direction: column; text-align: center; gap: 10px; }
+
+  /* Timeline horizontal scroll on mobile */
+  .tl-scroll { -webkit-overflow-scrolling: touch; padding-bottom: 20px; }
+  .tl-track { min-width: 760px; }
+
+  /* What grid */
+  .what-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pullquote { padding: 32px 28px; }
+  .pullquote blockquote { font-size: 1.1rem; }
+
+  /* Stat ribbon */
+  .stat-ribbon { flex-direction: column; }
+  .sr-item + .sr-item { border-left: none; border-top: 1px solid rgba(255,255,255,0.15); }
+
+  /* CTA */
+  .cta-h2 { font-size: clamp(2rem, 7.5vw, 3rem); }
+  .cta-sub { font-size: 1rem; }
+
+  /* Touch targets — minimum 44px */
+  .btn { min-height: 48px; padding: 14px 28px; font-size: 0.78rem; }
+  .nav-brand .logo-circle { width: 40px; height: 40px; font-size: 0.95rem; }
+
+  /* MTN badge shrink */
+  .mtn-badge { padding: 7px 12px; font-size: 0.55rem; right: 4%; top: 88px; }
+  .mtn-badge .mtn-logo { font-size: 1.1rem; }
+
+  /* Theme section */
+  .theme-kicker { letter-spacing: 0; }
+  .theme-dash { margin: 14px 0 36px; }
+  .theme-body { font-size: 0.98rem; padding: 0 4px; }
+
+  /* CTA contacts stack */
+  .cta-contacts { align-items: flex-start; gap: 16px; padding: 0 8px; }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+  .hero-h1 { font-size: 2.4rem; }
+  .h-stat .n { font-size: 1.75rem; }
+  .t-num { font-size: 2.2rem; }
+  .t-block { min-width: 62px; padding: 13px 9px; }
+  .timer { gap: 5px; }
+  .t-sep { font-size: 1.7rem; padding-bottom: 14px; }
+  .logo-text strong { font-size: 0.78rem; }
+  .logo-text span { display: none; }
+  .mtn-badge { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-brand" aria-label="TGG Campus Eco-Challenge Home">
+    <div class="logo-circle" aria-hidden="true">tgg</div>
+    <div class="logo-text">
+      <strong>TGG Campus Eco-Challenge</strong>
+      <span>NIGERIA · 2026</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#what">About</a></li>
+    <li><a href="#steps">How It Works</a></li>
+    <li><a href="#prizes">Prizes</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#faq">FAQs</a></li>
+    <li><a href="/register" class="btn btn-green">Register Now</a></li>
+  </ul>
+
+  <button class="hamburger" id="ham" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="mob-menu" id="mobMenu" role="dialog" aria-label="Mobile navigation">
+  <a href="#what"     class="mob-lnk">About</a>
+  <a href="#steps"    class="mob-lnk">How It Works</a>
+  <a href="#prizes"   class="mob-lnk">Prizes</a>
+  <a href="#timeline" class="mob-lnk">Timeline</a>
+  <a href="#faq"      class="mob-lnk">FAQs</a>
+  <a href="/register" class="btn btn-gold" style="font-size:1rem;padding:18px 52px;">Register Now &rarr;</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" role="banner">
+
+  <!-- Futuristic scan line -->
+  <div class="hero-scan" aria-hidden="true"></div>
+
+  <!-- MTN badge -->
+  <div class="mtn-badge" aria-label="Proudly supported by MTN">
+    <span class="mtn-logo">MTN</span>
+    PROUDLY SUPPORTED BY
+  </div>
+
+  <!-- Floating leaves -->
+  <div class="hero-leaves" aria-hidden="true">
+    <div class="leaf" style="left:6%;  width:26px;height:26px;animation-duration:14s;animation-delay:0s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#4CAF50" opacity="0.55"/></svg>
+    </div>
+    <div class="leaf" style="left:18%; width:18px;height:18px;animation-duration:18s;animation-delay:2.5s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#1B6B1E" opacity="0.5"/></svg>
+    </div>
+    <div class="leaf" style="left:33%; width:22px;height:22px;animation-duration:20s;animation-delay:5s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#66BB6A" opacity="0.4"/></svg>
+    </div>
+    <div class="leaf" style="left:50%; width:30px;height:30px;animation-duration:22s;animation-delay:1s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#2E7D32" opacity="0.35"/></svg>
+    </div>
+    <div class="leaf" style="left:64%; width:20px;height:20px;animation-duration:16s;animation-delay:7s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#4CAF50" opacity="0.5"/></svg>
+    </div>
+    <div class="leaf" style="left:78%; width:16px;height:16px;animation-duration:19s;animation-delay:3s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#1B6B1E" opacity="0.45"/></svg>
+    </div>
+    <div class="leaf" style="left:90%; width:24px;height:24px;animation-duration:24s;animation-delay:9s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#4CAF50" opacity="0.48"/></svg>
+    </div>
+    <div class="leaf" style="left:43%; width:14px;height:14px;animation-duration:17s;animation-delay:11s;">
+      <svg viewBox="0 0 40 52"><path d="M20 50C20 50 2 32 5 16C8 2 32 2 35 16C38 32 20 50 20 50Z" fill="#81C784" opacity="0.38"/></svg>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Nigeria's First University Environmental Competition &middot; 2026</p>
+
+    <h1 class="hero-h1">
+      From <em>Classroom</em><br>to Climate Action
+    </h1>
+
+    <p class="hero-sub">
+      A groundbreaking competition open to individuals and teams, challenging university students to document real campus environmental problems and design real, implementable solutions &mdash; organised by TGG Foundation, supported by MTN.
+    </p>
+
+    <div class="hero-pills">
+      <div class="pill"><strong>UNIPORT</strong> &middot; University of Port Harcourt</div>
+      <div class="pill"><strong>RSU</strong> &middot; Rivers State University</div>
+      <div class="pill"><strong>IAUE</strong> &middot; Ignatius Ajuru University</div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="/register" class="btn btn-gold">Register Now &mdash; It&rsquo;s Free &rarr;</a>
+      <a href="#steps"    class="btn btn-outline">Learn How It Works</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="h-stat">
+        <span class="n" data-count="40000" data-suffix="+">40,000+</span>
+        <span class="l">Students Eligible</span>
+      </div>
+      <div class="h-stat">
+        <span class="n">&#8358;1.8M</span>
+        <span class="l">In Prizes</span>
+      </div>
+      <div class="h-stat">
+        <span class="n" data-count="3">3</span>
+        <span class="l">Universities</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     WHAT IS THE ECO-CHALLENGE
+     ============================================================ -->
+<section id="what" class="sec sec-cream">
+  <div class="container">
+    <span class="sec-label sec-label-cream reveal">The Competition</span>
+    <div class="what-grid">
+
+      <div class="what-text reveal">
+        <h2>What Is The<br><em>Eco-Challenge?</em></h2>
+        <p>The TGG Campus Eco-Challenge 2026 is Nigeria's first university-based environmental innovation competition, organised by Tilda Goes Green Foundation and proudly supported by MTN Nigeria.</p>
+        <p>Students at three Rivers State universities will identify real environmental problems on their campuses, research their root causes, and design practical, innovative solutions that universities and government partners can actually implement.</p>
+        <p>This is not awareness theatre &mdash; it is field research, engineering thinking, and real-world impact, all wrapped in a competition that rewards the boldest ideas with life-changing prizes.</p>
+        <a href="/register" class="btn btn-green" style="margin-top:20px;">Join the Challenge &rarr;</a>
+      </div>
+
+      <div class="pullquote reveal rd2">
+        <blockquote>
+          &ldquo;This is not just awareness &mdash; it&rsquo;s action. Students will document real problems and design solutions that can actually be implemented.&rdquo;
+        </blockquote>
+        <cite>&mdash; Amb. Matilda Gogo Lambert, Founder, TGG Foundation</cite>
+      </div>
+    </div>
+
+    <div class="stat-ribbon reveal">
+      <div class="sr-item">
+        <span class="n">200+</span>
+        <span class="l">Problems to Document</span>
+      </div>
+      <div class="sr-item">
+        <span class="n">200+</span>
+        <span class="l">Solutions to Design</span>
+      </div>
+      <div class="sr-item">
+        <span class="n">6</span>
+        <span class="l">Months of Impact</span>
+      </div>
+      <div class="sr-item">
+        <span class="n">&#8358;1.8M</span>
+        <span class="l">Total Prize Pool</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     THE THEME
+     ============================================================ -->
+<section id="theme" class="sec">
+  <span class="sec-label sec-label-muted reveal" style="text-align:center;display:block;">Competition Theme 2026</span>
+
+  <div class="theme-kicker reveal rd1">Waste&#8209;<span>to</span>&#8209;Wealth</div>
+  <p class="theme-dash reveal rd2">Driving Eco-Innovation on Campus</p>
+  <p class="theme-body reveal rd3">
+    Every campus has waste problems &mdash; overflowing bins, inefficient energy systems, polluted water, lost biodiversity. The theme challenges you to look at these not as burdens, but as economic opportunities. Design solutions that are simultaneously green, practical, and wealth-creating for your institution and your community.
+  </p>
+
+  <div class="theme-ring reveal rd4" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="44" stroke="#4CAF50" stroke-width="1.5" stroke-dasharray="8 5"/>
+      <circle cx="50" cy="50" r="30" stroke="#1B6B1E" stroke-width="1"/>
+      <circle cx="50" cy="50" r="7" fill="#4CAF50"/>
+      <path d="M50 6 L50 20 M50 80 L50 94 M6 50 L20 50 M80 50 L94 50" stroke="#4CAF50" stroke-width="1.2"/>
+      <path d="M28 28 Q50 44 72 28 Q84 50 72 72 Q50 56 28 72 Q16 50 28 28Z" stroke="#1B6B1E" stroke-width="1.2" fill="rgba(27,107,30,0.25)"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HOW TO PARTICIPATE — 4 STEPS
+     ============================================================ -->
+<section id="steps" class="sec sec-cream">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-label sec-label-cream reveal">Participation Guide</span>
+      <h2 class="sec-title sec-title-dark reveal">How To Participate</h2>
+      <p class="sec-intro sec-intro-dark reveal rd1">Four clear steps from first observation to final submission. Every enrolled student can do this.</p>
+    </div>
+
+    <div class="steps-grid">
+
+      <!-- Step 01 -->
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" aria-label="Search icon">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <h3>Identify The Problem</h3>
+        <p>Observe and document a specific environmental problem on your campus &mdash; waste management, pollution, energy inefficiency, water issues, biodiversity loss. Look around with curious, critical eyes. Every campus has more problems than anyone is talking about.</p>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="step-card reveal rd1">
+        <div class="step-num">02</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" aria-label="Research icon">
+            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/>
+          </svg>
+        </div>
+        <h3>Research The Causes</h3>
+        <p>Investigate root causes through data collection, surveys, interviews, and scientific analysis. Build a factual, evidence-based case for the problem you have identified. Strong research is the foundation of every great solution &mdash; and every high-scoring entry.</p>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="step-card reveal rd2">
+        <div class="step-num">03</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" aria-label="Idea icon">
+            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7Z"/>
+          </svg>
+        </div>
+        <h3>Design The Solution</h3>
+        <p>Develop a practical, innovative solution with a clear implementation plan, cost estimate, and projected environmental impact. Think creatively &mdash; the most celebrated entries will be the ones that are genuinely feasible and genuinely bold at the same time.</p>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="step-card reveal rd3">
+        <div class="step-num">04</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" aria-label="Upload icon">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <h3>Submit Your Entry</h3>
+        <p>Upload your full project proposal through this portal before <strong>25th April 2026</strong>. You can enter as an individual or as a team. Text documents, images, videos, and data files are all supported. Registration and submission are completely free. Every qualified entry receives a digital certificate.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     JUDGING CRITERIA
+     ============================================================ -->
+<section id="judging" class="sec sec-dark">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-label sec-label-gold reveal">Evaluation Framework</span>
+      <h2 class="sec-title sec-title-white reveal">How Entries Are Judged</h2>
+      <p class="sec-intro sec-intro-muted reveal rd1">An expert panel will score every qualified submission across five weighted criteria.</p>
+    </div>
+
+    <div class="criteria">
+      <div class="crit reveal">
+        <div class="crit-top">
+          <span class="crit-name">Problem Identification</span>
+          <span class="crit-pct">20%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-w="20"></div></div>
+      </div>
+      <div class="crit reveal rd1">
+        <div class="crit-top">
+          <span class="crit-name">Innovation &amp; Creativity</span>
+          <span class="crit-pct">25%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-w="25"></div></div>
+      </div>
+      <div class="crit reveal rd2">
+        <div class="crit-top">
+          <span class="crit-name">Feasibility</span>
+          <span class="crit-pct">25%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-w="25"></div></div>
+      </div>
+      <div class="crit reveal rd3">
+        <div class="crit-top">
+          <span class="crit-name">Impact Potential</span>
+          <span class="crit-pct">20%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-w="20"></div></div>
+      </div>
+      <div class="crit reveal rd4">
+        <div class="crit-top">
+          <span class="crit-name">Presentation Quality</span>
+          <span class="crit-pct">10%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-w="10"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PRIZES & AWARDS
+     ============================================================ -->
+<section id="prizes" class="sec sec-black">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-label sec-label-gold reveal">Recognition &amp; Rewards</span>
+      <h2 class="sec-title sec-title-white reveal">Win Big. Change Your Campus.</h2>
+      <p class="sec-intro sec-intro-muted reveal rd1">The most impactful entries receive life-changing prizes and national recognition.</p>
+    </div>
+
+    <div class="podium">
+      <!-- 2nd -->
+      <div class="p-card p-silver reveal rd1">
+        <span class="p-medal" aria-label="Silver medal">&#129352;</span>
+        <div class="p-place">2nd Place</div>
+        <span class="p-amount">&#8358;500,000</span>
+        <div class="p-perks">
+          <div class="p-perk">Certificate of Excellence</div>
+          <div class="p-perk">National Recognition</div>
+        </div>
+      </div>
+
+      <!-- 1st (tallest) -->
+      <div class="p-card p-gold reveal">
+        <span class="p-medal" aria-label="Gold medal">&#129351;</span>
+        <div class="p-place">Grand Prize</div>
+        <span class="p-amount">&#8358;1,000,000</span>
+        <div class="p-perks">
+          <div class="p-perk">Implementation Support</div>
+          <div class="p-perk">National Recognition</div>
+          <div class="p-perk">Media Coverage</div>
+          <div class="p-perk">Mentorship Programme</div>
+        </div>
+      </div>
+
+      <!-- 3rd -->
+      <div class="p-card p-bronze reveal rd2">
+        <span class="p-medal" aria-label="Bronze medal">&#129353;</span>
+        <div class="p-place">3rd Place</div>
+        <span class="p-amount">&#8358;300,000</span>
+        <div class="p-perks">
+          <div class="p-perk">Certificate of Excellence</div>
+          <div class="p-perk">National Recognition</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prizes-sub reveal">
+      <div class="sub-prize">
+        <span class="sp-label">Top 10 Finalists</span>
+        <p>Certificates of Excellence + TGG branded items + personal mentorship from leading environmental professionals</p>
+      </div>
+      <div class="sub-prize">
+        <span class="sp-label">Consolation Prizes</span>
+        <p>Special consolation prizes are available for additional outstanding entries beyond the top three &mdash; more winners, more recognition</p>
+      </div>
+      <div class="sub-prize" style="grid-column:1/-1;">
+        <span class="sp-label">All Qualified Entries</span>
+        <p>Digital Certificate of Participation + eco-friendly TGG branded items &mdash; every genuine effort is recognised and rewarded</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COUNTDOWN TIMER
+     ============================================================ -->
+<section id="countdown" class="sec">
+  <div class="cd-eyebrow">Time Remaining Until</div>
+  <h2 class="cd-title reveal">Submission Deadline</h2>
+
+  <div class="timer reveal rd1" role="timer" aria-live="polite" aria-label="Countdown to April 25 2026 deadline">
+    <div class="t-block">
+      <span class="t-num" id="cd-d">00</span>
+      <span class="t-lbl">Days</span>
+    </div>
+    <span class="t-sep" aria-hidden="true">:</span>
+    <div class="t-block">
+      <span class="t-num" id="cd-h">00</span>
+      <span class="t-lbl">Hours</span>
+    </div>
+    <span class="t-sep" aria-hidden="true">:</span>
+    <div class="t-block">
+      <span class="t-num" id="cd-m">00</span>
+      <span class="t-lbl">Minutes</span>
+    </div>
+    <span class="t-sep" aria-hidden="true">:</span>
+    <div class="t-block">
+      <span class="t-num" id="cd-s">00</span>
+      <span class="t-lbl">Seconds</span>
+    </div>
+  </div>
+
+  <p class="cd-note reveal rd2">&#128197; Deadline: 25th April 2026 &middot; 11:59 PM</p>
+  <a href="/register" class="btn btn-gold reveal rd3" style="position:relative;z-index:1;">Submit Your Entry &rarr;</a>
+</section>
+
+
+<!-- ============================================================
+     PARTICIPATING UNIVERSITIES
+     ============================================================ -->
+<section id="universities" class="sec sec-cream">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-label sec-label-cream reveal">Participating Institutions</span>
+      <h2 class="sec-title sec-title-dark reveal">Open To Students At</h2>
+    </div>
+
+    <div class="uni-grid">
+      <div class="uni-card reveal">
+        <span class="uni-abbr">UNIPORT</span>
+        <h3 class="uni-name">University of Port Harcourt</h3>
+        <span class="uni-count">20,000+ Students</span>
+      </div>
+      <div class="uni-card reveal rd1">
+        <span class="uni-abbr">RSU</span>
+        <h3 class="uni-name">Rivers State University</h3>
+        <span class="uni-count">15,000+ Students</span>
+      </div>
+      <div class="uni-card reveal rd2">
+        <span class="uni-abbr">IAUE</span>
+        <h3 class="uni-name">Ignatius Ajuru University of Education</h3>
+        <span class="uni-count">5,000+ Students</span>
+      </div>
+    </div>
+
+    <p class="uni-note reveal">Must be a currently enrolled student at one of these institutions to qualify.</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT TGG FOUNDATION
+     ============================================================ -->
+<section id="about" class="sec sec-dark">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-text reveal">
+        <span class="sec-label sec-label-gold">Who We Are</span>
+        <h2>About Tilda Goes Green Foundation</h2>
+        <p>Founded in 2018 by award-winning actress and environmental advocate <strong>Amb. Matilda Gogo Lambert</strong>, Tilda Goes Green (TGG) Foundation has spent seven years building Nigeria&rsquo;s most impactful grassroots environmental movement.</p>
+        <p>With over 1,000 programme graduates, a UN-acknowledged documentary &ldquo;Black Creeks&rdquo; (acknowledged by UNEP), and strategic partnerships with INTELS Nigeria Limited &mdash; Nigeria&rsquo;s largest logistics company &mdash; and multiple Rivers State government ministries, TGG has earned its place as a leading voice for environmental action in the Niger Delta.</p>
+        <p>The Campus Eco-Challenge is TGG&rsquo;s most ambitious initiative yet: scaling impact from communities to campuses, and from campuses to national policy. Rivers State 2026 &rarr; South-South 2027 &rarr; National 2028.</p>
+        <div class="founder-row">
+          <div class="founder-av" aria-label="Founder avatar">M</div>
+          <div>
+            <strong>Amb. Matilda Gogo Lambert</strong>
+            <span>Founder &amp; Executive Director, TGG Foundation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cred-list reveal rd2">
+        <div class="cred-item">
+          <span class="cred-em">&#127758;</span>
+          <div>
+            <strong>UN / UNEP Recognised</strong>
+            <span>&ldquo;Black Creeks&rdquo; documentary acknowledged by UNEP</span>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-em">&#129309;</span>
+          <div>
+            <strong>INTELS Nigeria Partner</strong>
+            <span>Nigeria&rsquo;s largest logistics company</span>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-em">&#127963;</span>
+          <div>
+            <strong>Government Partnerships</strong>
+            <span>Rivers State ministry collaborations</span>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-em">&#128197;</span>
+          <div>
+            <strong>7 Years of Impact</strong>
+            <span>Continuous environmental advocacy since 2018</span>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-em">&#127891;</span>
+          <div>
+            <strong>1,000+ Graduates</strong>
+            <span>Programme alumni across Rivers State</span>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-em">&#128640;</span>
+          <div>
+            <strong>National Scale Roadmap</strong>
+            <span>Rivers &rsquo;26 &rarr; South-South &rsquo;27 &rarr; National &rsquo;28</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mtn-row reveal">
+      <p class="mtn-row-lbl">Proudly Supported By</p>
+      <div class="mtn-big" role="img" aria-label="MTN Nigeria">MTN</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TIMELINE
+     ============================================================ -->
+<section id="timeline" class="sec sec-cream">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-label sec-label-cream reveal">Competition Calendar</span>
+      <h2 class="sec-title sec-title-dark reveal">Competition Timeline</h2>
+    </div>
+
+    <div class="tl-scroll">
+      <div class="tl-track">
+        <div class="tl-phase reveal">
+          <div class="tl-dot">1</div>
+          <span class="tl-month">March 2026</span>
+          <div class="tl-name">Launch</div>
+          <p class="tl-desc">Official launch of the TGG Campus Eco-Challenge 2026 across all three campuses</p>
+        </div>
+        <div class="tl-phase reveal rd1">
+          <div class="tl-dot">2</div>
+          <span class="tl-month">Mar &ndash; Apr 2026</span>
+          <div class="tl-name">Campus Activations</div>
+          <p class="tl-desc">Awareness campaigns, workshops, and information sessions across UNIPORT, RSU &amp; IAUE</p>
+        </div>
+        <div class="tl-phase reveal rd2">
+          <div class="tl-dot">3</div>
+          <span class="tl-month">April 2026</span>
+          <div class="tl-name">Submission Window</div>
+          <p class="tl-desc">Submit your project via this portal. Deadline: <strong>25th April 2026</strong></p>
+        </div>
+        <div class="tl-phase reveal rd3">
+          <div class="tl-dot">4</div>
+          <span class="tl-month">Jun &ndash; Jul 2026</span>
+          <div class="tl-name">Judging</div>
+          <p class="tl-desc">Expert panel reviews all qualified submissions across the five judging criteria</p>
+        </div>
+        <div class="tl-phase reveal rd4">
+          <div class="tl-dot">5</div>
+          <span class="tl-month">August 2026</span>
+          <div class="tl-name">Grand Finale</div>
+          <p class="tl-desc">Prize-giving ceremony in Port Harcourt. Finalists notified with full details</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section id="faq" class="sec sec-dark">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-label sec-label-gold reveal">Common Questions</span>
+      <h2 class="sec-title sec-title-white reveal">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="fq reveal">
+        <summary>Who can participate?</summary>
+        <p class="fq-ans">Any currently enrolled student at the University of Port Harcourt (UNIPORT), Rivers State University (RSU), or Ignatius Ajuru University of Education (IAUE) is eligible to participate.</p>
+      </details>
+
+      <details class="fq reveal rd1">
+        <summary>Can I enter alone or as a team?</summary>
+        <p class="fq-ans">Both individuals and teams are welcome. You can enter solo or collaborate with fellow students &mdash; whichever works best for your project. All team members must be enrolled at one of the three participating universities.</p>
+      </details>
+
+      <details class="fq reveal rd2">
+        <summary>What kinds of problems should I focus on?</summary>
+        <p class="fq-ans">Any environmental issue directly observable on your campus &mdash; waste management, water usage, energy inefficiency, air or noise pollution, sanitation, biodiversity loss, and more. Focus on something you have personally witnessed with a real, measurable impact on campus life.</p>
+      </details>
+
+      <details class="fq reveal rd3">
+        <summary>Is there a registration fee?</summary>
+        <p class="fq-ans">No. Registration and submission are completely free. This is TGG Foundation&rsquo;s investment in Nigerian students who care about their environment. Your only investment is your time, curiosity, and effort.</p>
+      </details>
+
+      <details class="fq reveal">
+        <summary>What format should my submission be in?</summary>
+        <p class="fq-ans">A written project proposal is required, supported by images, videos, survey data, and any relevant research materials. The portal accepts text documents, image files, and video uploads. Full submission guidelines will be available upon registration.</p>
+      </details>
+
+      <details class="fq reveal rd1">
+        <summary>When is the submission deadline?</summary>
+        <p class="fq-ans">The submission deadline is <strong>25th April, 2026</strong> at 11:59 PM. We strongly recommend registering early so you have maximum time to research, develop, and refine your project.</p>
+      </details>
+
+      <details class="fq reveal rd2">
+        <summary>Where is the Grand Finale held?</summary>
+        <p class="fq-ans">The Grand Finale and prize-giving ceremony will be held in Port Harcourt in August 2026. All finalists will be notified well in advance with full event details, schedule, and logistics information.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section id="cta">
+  <div class="container">
+    <h2 class="cta-h2 reveal">Your Campus Has a Problem.<br>You Have the Solution.</h2>
+    <p class="cta-sub reveal rd1">Join 40,000+ eligible students. Document real issues. Design real change. Win up to &#8358;1,000,000.</p>
+
+    <div class="cta-btns reveal rd2">
+      <a href="/register" class="btn btn-gold">Register Now &mdash; It&rsquo;s Free &rarr;</a>
+      <a href="mailto:Tildagoesgreen@gmail.com" class="btn btn-outline">Contact Us</a>
+    </div>
+
+    <div class="cta-contacts reveal rd3">
+      <div class="cc-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:Tildagoesgreen@gmail.com">Tildagoesgreen@gmail.com</a>
+      </div>
+      <div class="cc-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:08023561100">08023561100</a>
+      </div>
+      <div class="cc-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <a href="https://www.tildagoesgreen.org" target="_blank" rel="noopener noreferrer">tildagoesgreen.org</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+
+    <div class="ft-brand">
+      <div class="logo-circle" style="margin-bottom:16px;" aria-hidden="true">tgg</div>
+      <div class="logo-text" style="margin-bottom:14px;">
+        <strong style="font-size:0.95rem;">Tilda Goes Green Foundation</strong>
+        <span>PARTNERING PEOPLE TO PROFIT THE PLANET</span>
+      </div>
+      <p class="ft-tagline">Organising Nigeria&rsquo;s first university environmental innovation competition to build a generation of climate-conscious leaders.</p>
+    </div>
+
+    <nav class="ft-col" aria-label="Footer links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#what">About the Challenge</a></li>
+        <li><a href="#steps">How It Works</a></li>
+        <li><a href="#prizes">Prizes</a></li>
+        <li><a href="#universities">Universities</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="mailto:Tildagoesgreen@gmail.com">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="ft-col">
+      <h4>Follow Us</h4>
+      <div class="social-row">
+        <a href="https://youtube.com/@TildaGoesGreenTV" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="YouTube — Tilda Goes Green TV">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#050b05"/></svg>
+        </a>
+        <a href="https://facebook.com/TildaGoesGreenFoundation" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook — Tilda Goes Green Foundation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://instagram.com/Tildagoesgreen" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram — @Tildagoesgreen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bar">
+    <p class="ft-copy">&copy; 2026 Tilda Goes Green Foundation. All rights reserved.</p>
+    <div class="ft-mtn">
+      <span>Proudly Supported By</span>
+      <div class="ft-mtn-badge">MTN</div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ------- NAVBAR SCROLL ------- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  /* ------- HAMBURGER MENU ------- */
+  const ham     = document.getElementById('ham');
+  const mobMenu = document.getElementById('mobMenu');
+
+  ham.addEventListener('click', () => {
+    const open = mobMenu.classList.toggle('open');
+    ham.classList.toggle('open', open);
+    ham.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.mob-lnk, .mob-menu .btn').forEach(el => {
+    el.addEventListener('click', () => {
+      mobMenu.classList.remove('open');
+      ham.classList.remove('open');
+      ham.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ------- COUNTDOWN TIMER ------- */
+  const deadline = new Date('2026-04-25T23:59:59').getTime();
+  const dEl = document.getElementById('cd-d');
+  const hEl = document.getElementById('cd-h');
+  const mEl = document.getElementById('cd-m');
+  const sEl = document.getElementById('cd-s');
+
+  function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+  function tick() {
+    const diff = deadline - Date.now();
+    if (diff <= 0) {
+      dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '00';
+      return;
+    }
+    dEl.textContent = pad(Math.floor(diff / 864e5));
+    hEl.textContent = pad(Math.floor((diff % 864e5) / 36e5));
+    mEl.textContent = pad(Math.floor((diff % 36e5) / 6e4));
+    sEl.textContent = pad(Math.floor((diff % 6e4) / 1e3));
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ------- INTERSECTION OBSERVER: REVEAL ------- */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ------- STEP NUMBER REVEAL ------- */
+  const stepObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.35 });
+
+  document.querySelectorAll('.step-num').forEach(el => stepObs.observe(el));
+
+  /* ------- PROGRESS BARS ------- */
+  const progObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target;
+        setTimeout(() => { fill.style.width = fill.dataset.w + '%'; }, 180);
+        progObs.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.prog-fill').forEach(el => progObs.observe(el));
+
+  /* ------- COUNTER ANIMATION ------- */
+  function animateCount(el, end, duration) {
+    const start = performance.now();
+    function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val = Math.floor(ease * end);
+      el.textContent = (el.dataset.suffix ? val.toLocaleString() + el.dataset.suffix : val.toLocaleString());
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  const countObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.dataset.count, 10);
+        if (!isNaN(target)) animateCount(el, target, 2200);
+        countObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+  /* ------- BUTTON RIPPLE ------- */
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      const span = document.createElement('span');
+      span.className = 'rpl';
+      span.style.left = e.offsetX + 'px';
+      span.style.top  = e.offsetY + 'px';
+      this.appendChild(span);
+      setTimeout(() => span.remove(), 600);
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
