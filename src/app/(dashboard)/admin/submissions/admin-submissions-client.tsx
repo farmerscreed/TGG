@@ -9,7 +9,8 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/status-badge'
-import { Search, FileText, ExternalLink, RefreshCw } from 'lucide-react'
+import { Search, FileText, ExternalLink, RefreshCw, ChevronRight } from 'lucide-react'
+import Link from 'next/link'
 import type { SubmissionStatus } from '@/lib/constants'
 
 const STATUSES = ['all', 'draft', 'submitted', 'under_review', 'shortlisted', 'winner', 'disqualified']
@@ -120,17 +121,20 @@ export function AdminSubmissionsClient({
                     {filtered.map(sub => (
                         <Card key={sub.id}>
                             <CardContent className="pt-4 pb-4 space-y-3">
-                                <div className="flex items-start justify-between gap-3">
+                                <Link href={`/admin/submissions/${sub.id}`} className="flex items-start justify-between gap-3 group">
                                     <div className="flex-1 min-w-0">
                                         <p className="font-mono text-xs text-gray-400">{sub.reference_code}</p>
-                                        <p className="font-semibold text-[#1a1a1a] truncate">{sub.title || 'Untitled'}</p>
+                                        <p className="font-semibold text-[#1a1a1a] truncate group-hover:text-[#1a5c38] transition-colors">{sub.title || 'Untitled'}</p>
                                         <p className="text-xs text-gray-500">
                                             {sub.profiles?.first_name} {sub.profiles?.last_name} · {sub.profiles?.university}
                                         </p>
                                         <p className="text-xs text-gray-400">{sub.category}</p>
                                     </div>
-                                    <StatusBadge status={sub.status as SubmissionStatus} size="sm" />
-                                </div>
+                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                        <StatusBadge status={sub.status as SubmissionStatus} size="sm" />
+                                        <ChevronRight size={16} className="text-gray-300 group-hover:text-[#1a5c38] transition-colors" />
+                                    </div>
+                                </Link>
 
                                 {/* Quick status update */}
                                 <div className="flex gap-2 flex-wrap">

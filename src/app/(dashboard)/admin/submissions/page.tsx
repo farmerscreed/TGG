@@ -17,7 +17,7 @@ export default async function AdminSubmissionsPage({ searchParams }: PageProps) 
         .from('submissions')
         .select(`
       id, reference_code, title, status, category, created_at, updated_at, is_locked,
-      profiles!submissions_user_id_fkey(first_name, last_name, university)
+      profiles!submissions_profile_user_fkey(first_name, last_name, university)
     `)
         .order('updated_at', { ascending: false })
 

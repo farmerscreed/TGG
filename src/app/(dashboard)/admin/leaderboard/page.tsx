@@ -37,7 +37,7 @@ export default async function AdminLeaderboardPage() {
     const { data: submissions } = ids.length > 0
         ? await supabase
             .from('submissions')
-            .select('id, reference_code, title, status, category, profiles!submissions_user_id_fkey(first_name, last_name, university)')
+            .select('id, reference_code, title, status, category, profiles!submissions_profile_user_fkey(first_name, last_name, university)')
             .in('id', ids)
         : { data: [] }
 
