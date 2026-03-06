@@ -1483,6 +1483,41 @@ details.fq[open] {
   .logo-text span { display: none; }
   .mtn-badge { display: none; }
 }
+
+/* Lawone Cloud credit */
+.lawone-credit {
+  text-align: center;
+  padding: 14px 0 6px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 10px;
+}
+.lawone-credit a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.28);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  font-family: 'Space Mono', monospace;
+  transition: color 0.25s;
+}
+.lawone-credit a:hover { color: rgba(255,255,255,0.65); }
+.lawone-credit .lc-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--leaf-green);
+  opacity: 0.5;
+  display: inline-block;
+  transition: opacity 0.25s;
+}
+.lawone-credit a:hover .lc-dot { opacity: 1; }
+.lawone-credit .lc-name {
+  color: rgba(255,255,255,0.5);
+  font-weight: 700;
+  transition: color 0.25s;
+}
+.lawone-credit a:hover .lc-name { color: var(--leaf-green); }
 </style>
 </head>
 <body>
@@ -2188,6 +2223,14 @@ details.fq[open] {
       <span>Proudly Supported By</span>
       <div class="ft-mtn-badge">MTN</div>
     </div>
+  </div>
+
+  <div class="lawone-credit">
+    <a href="https://lawonecloud.com" target="_blank" rel="noopener noreferrer" aria-label="Designed and built by Lawone Cloud">
+      <span>✦ designed &amp; built by</span>
+      <span class="lc-dot"></span>
+      <span class="lc-name">lawonecloud.com</span>
+    </a>
   </div>
 </footer>
 
