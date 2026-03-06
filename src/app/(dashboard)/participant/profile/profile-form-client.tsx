@@ -76,7 +76,7 @@ export function ProfileFormClient({ userId, userEmail, profile, role }: ProfileF
         const { error: upsertError } = await supabase.from('profiles').upsert({
             user_id: userId,
             ...form,
-        })
+        }, { onConflict: 'user_id' })
 
         if (upsertError) {
             setError('Failed to save profile. Please try again.')

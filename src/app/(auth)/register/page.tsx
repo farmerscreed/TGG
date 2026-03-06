@@ -68,7 +68,11 @@ export default function RegisterPage() {
                 data: {
                     first_name: data.first_name,
                     last_name: data.last_name,
+                    phone: data.phone,
+                    gender: data.gender,
                     university: data.university,
+                    department: data.department,
+                    year_of_study: data.year_of_study,
                 }
             },
         })
