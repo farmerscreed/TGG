@@ -43,7 +43,7 @@ export default async function AdminSubmissionDetailPage({ params }: PageProps) {
 
     if (!sub) notFound()
 
-    const profile = sub.profiles as { first_name: string; last_name: string; university: string } | null
+    const profile = sub.profiles as unknown as { first_name: string; last_name: string; university: string } | null
     const submitterName = profile ? `${profile.first_name ?? ''} ${profile.last_name ?? ''}`.trim() : '—'
 
     const avgScore = scores && scores.length > 0
