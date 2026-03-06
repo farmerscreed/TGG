@@ -10,7 +10,7 @@ export const UNIVERSITY_LABELS: Record<University, string> = {
 export const ROLES = ['participant', 'coordinator', 'admin', 'judge'] as const
 export type Role = typeof ROLES[number]
 
-export const SUBMISSION_STATUSES = ['draft', 'submitted', 'under_review', 'shortlisted', 'winner', 'not_selected'] as const
+export const SUBMISSION_STATUSES = ['draft', 'submitted', 'under_review', 'shortlisted', 'winner', 'not_selected', 'disqualified'] as const
 export type SubmissionStatus = typeof SUBMISSION_STATUSES[number]
 
 export const STATUS_CONFIG: Record<SubmissionStatus, { label: string; color: string; bgColor: string }> = {
@@ -20,6 +20,7 @@ export const STATUS_CONFIG: Record<SubmissionStatus, { label: string; color: str
   shortlisted: { label: 'Shortlisted', color: '#7c3aed', bgColor: '#f5f3ff' },
   winner: { label: 'Winner', color: '#16a34a', bgColor: '#f0fdf4' },
   not_selected: { label: 'Not Selected', color: '#dc2626', bgColor: '#fef2f2' },
+  disqualified: { label: 'Disqualified', color: '#b91c1c', bgColor: '#fef2f2' },
 }
 
 export const GENDERS = ['Male', 'Female', 'Prefer not to say'] as const
