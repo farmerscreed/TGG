@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, Eye, EyeOff } from 'lucide-react'
+import { Loader2, Eye, EyeOff, CheckCircle2 } from 'lucide-react'
 
 const loginSchema = z.object({
     email: z.string().email('Please enter a valid email address'),
@@ -23,6 +23,8 @@ type LoginFormData = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const isVerified = searchParams.get('verified') === '1'
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
@@ -86,6 +88,13 @@ export default function LoginPage() {
                 <div className="px-6 py-8">
                     <h2 className="text-[#1a1a1a] text-2xl font-bold mb-1">Welcome back</h2>
                     <p className="text-gray-500 text-sm mb-6">Sign in to your account to continue</p>
+
+                    {isVerified && (
+                        <Alert className="mb-4 border-[#1a5c38]/30 bg-[#e8f5e9]">
+                            <CheckCircle2 className="text-[#1a5c38]" size={16} />
+                            <AlertDescription className="text-[#1a5c38] ml-2 font-medium">Email verified! You can now sign in.</AlertDescription>
+                        </Alert>
+                    )}
 
                     {error && (
                         <Alert variant="destructive" className="mb-4">
