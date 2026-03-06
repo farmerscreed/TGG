@@ -23,7 +23,7 @@ const registerSchema = z.object({
     email: z.string().email('Please enter a valid email'),
     phone: z.string().min(10, 'Please enter a valid phone number'),
     gender: z.enum(['Male', 'Female', 'Prefer not to say']),
-    university: z.enum(['UST', 'IAUE', 'UNIPORT']),
+    university: z.enum(['RSU', 'IAUE', 'UNIPORT']),
     department: z.string().min(2, 'Department is required'),
     year_of_study: z.enum(['100L', '200L', '300L', '400L', '500L', 'Postgraduate']),
     password: z.string().min(8, 'Password must be at least 8 characters'),

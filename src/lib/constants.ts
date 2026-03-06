@@ -1,8 +1,8 @@
-export const UNIVERSITIES = ['UST', 'IAUE', 'UNIPORT'] as const
+export const UNIVERSITIES = ['RSU', 'IAUE', 'UNIPORT'] as const
 export type University = typeof UNIVERSITIES[number]
 
 export const UNIVERSITY_LABELS: Record<University, string> = {
-  UST: 'Rivers State University (UST)',
+  RSU: 'Rivers State University (RSU)',
   IAUE: 'Ignatius Ajuru University of Education (IAUE)',
   UNIPORT: 'University of Port Harcourt (UNIPORT)',
 }

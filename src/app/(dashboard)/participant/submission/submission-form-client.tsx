@@ -66,10 +66,14 @@ export function SubmissionFormClient({
 
     const [uploadedFiles, setUploadedFiles] = useState<Record<string, unknown>[]>(existingFiles)
     const autoSaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
+    const isSavingRef = useRef(false)
+    const submissionIdRef = useRef<string | null>((sub?.id as string) ?? null)
 
     const set = (key: string) => (value: string) => setFormData(fd => ({ ...fd, [key]: value }))
 
     const saveProgress = useCallback(async () => {
+        if (isSavingRef.current) return
+        isSavingRef.current = true
         setSaving(true)
         setSaveStatus('saving')
         const supabase = createClient()
@@ -81,19 +85,22 @@ export function SubmissionFormClient({
             status: 'draft',
         }
 
-        let id = submissionId
+        let id = submissionIdRef.current
         if (!id) {
+            const refCode = `TGG-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`
             const { data, error: createError } = await supabase
                 .from('submissions')
-                .insert({ ...payload, reference_code: '' })
+                .insert({ ...payload, reference_code: refCode })
                 .select('id')
                 .single()
             if (createError || !data) {
                 setSaveStatus('error')
                 setSaving(false)
+                isSavingRef.current = false
                 return
             }
             id = data.id
+            submissionIdRef.current = id
             setSubmissionId(id)
         } else {
             const { error: updateError } = await supabase
@@ -103,14 +110,16 @@ export function SubmissionFormClient({
             if (updateError) {
                 setSaveStatus('error')
                 setSaving(false)
+                isSavingRef.current = false
                 return
             }
         }
 
         setSaveStatus('saved')
         setSaving(false)
+        isSavingRef.current = false
         setTimeout(() => setSaveStatus('idle'), 3000)
-    }, [userId, formData, step, submissionId])
+    }, [userId, formData, step])
 
     // Autosave
     useEffect(() => {
