@@ -2,32 +2,33 @@
 
 import { useCallback, useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { X, Upload, Loader2, Image as ImageIcon, FileText, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { FILE_LIMITS } from '@/lib/constants'
 
-interface UploadedFile {
+// Mirrors a row in the public.submission_files table. `file_url` stores the
+// storage path (the bucket is private, so links are signed on read, not here).
+interface SubmissionFile {
     id: string
-    name: string
-    url: string
-    size: number
-    type: 'document' | 'image'
+    file_name: string
+    file_type: 'document' | 'image'
+    file_url: string
+    file_size_bytes: number
 }
 
 interface FileUploadProps {
     type: 'document' | 'image'
     submissionId: string
     userId: string
-    existingFiles?: UploadedFile[]
-    onFilesChange: (files: UploadedFile[]) => void
+    existingFiles?: SubmissionFile[]
+    onFilesChange: (files: SubmissionFile[]) => void
     disabled?: boolean
 }
 
 export function FileUpload({ type, submissionId, userId, existingFiles = [], onFilesChange, disabled }: FileUploadProps) {
     const inputRef = useRef<HTMLInputElement>(null)
-    const [files, setFiles] = useState<UploadedFile[]>(existingFiles)
+    const [files, setFiles] = useState<SubmissionFile[]>(existingFiles)
     const [uploading, setUploading] = useState(false)
     const [uploadProgress, setUploadProgress] = useState(0)
     const [error, setError] = useState<string | null>(null)
@@ -61,12 +62,14 @@ export function FileUpload({ type, submissionId, userId, existingFiles = [], onF
 
         setUploading(true)
         const supabase = createClient()
-        const newFiles: UploadedFile[] = []
+        const newFiles: SubmissionFile[] = []
 
         for (let i = 0; i < selected.length; i++) {
             const f = selected[i]
             const path = `${userId}/${submissionId}/${Date.now()}_${f.name}`
-            const { data, error: uploadError } = await supabase.storage
+
+            // 1) Upload the object to the (private) storage bucket
+            const { error: uploadError } = await supabase.storage
                 .from('submission-files')
                 .upload(path, f, { upsert: false })
 
@@ -75,16 +78,29 @@ export function FileUpload({ type, submissionId, userId, existingFiles = [], onF
                 break
             }
 
-            const { data: { publicUrl } } = supabase.storage.from('submission-files').getPublicUrl(path)
+            // 2) Record the file in the database so it survives reloads and is
+            //    visible to judges/coordinators/admins. Without this row the
+            //    upload is effectively lost.
+            const { data: row, error: insertError } = await supabase
+                .from('submission_files')
+                .insert({
+                    submission_id: submissionId,
+                    file_url: path,
+                    file_type: type,
+                    file_name: f.name,
+                    file_size_bytes: f.size,
+                })
+                .select('id, file_name, file_type, file_url, file_size_bytes')
+                .single()
 
-            newFiles.push({
-                id: data.path,
-                name: f.name,
-                url: publicUrl,
-                size: f.size,
-                type,
-            })
+            if (insertError || !row) {
+                // Roll back the orphaned storage object so we don't leave junk behind
+                await supabase.storage.from('submission-files').remove([path])
+                setError(`Could not save ${f.name}: ${insertError?.message ?? 'unknown error'}`)
+                break
+            }
 
+            newFiles.push(row as SubmissionFile)
             setUploadProgress(Math.round(((i + 1) / selected.length) * 100))
         }
 
@@ -96,10 +112,22 @@ export function FileUpload({ type, submissionId, userId, existingFiles = [], onF
         if (inputRef.current) inputRef.current.value = ''
     }, [files, limits, maxSizeBytes, submissionId, userId, type, onFilesChange])
 
-    const handleRemove = useCallback(async (fileId: string) => {
+    const handleRemove = useCallback(async (file: SubmissionFile) => {
         const supabase = createClient()
-        await supabase.storage.from('submission-files').remove([fileId])
-        const updated = files.filter(f => f.id !== fileId)
+        // Delete the DB row first; storage cleanup is best-effort afterwards.
+        const { error: deleteError } = await supabase
+            .from('submission_files')
+            .delete()
+            .eq('id', file.id)
+
+        if (deleteError) {
+            setError(`Could not remove ${file.file_name}: ${deleteError.message}`)
+            return
+        }
+
+        await supabase.storage.from('submission-files').remove([file.file_url])
+
+        const updated = files.filter(f => f.id !== file.id)
         setFiles(updated)
         onFilesChange(updated)
     }, [files, onFilesChange])
@@ -121,12 +149,12 @@ export function FileUpload({ type, submissionId, userId, existingFiles = [], onF
                         <div key={f.id} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2.5 border border-gray-200">
                             <Icon size={18} className="text-[#1a5c38] flex-shrink-0" />
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-[#1a1a1a] truncate">{f.name}</p>
-                                <p className="text-xs text-gray-400">{formatSize(f.size)}</p>
+                                <p className="text-sm font-medium text-[#1a1a1a] truncate">{f.file_name}</p>
+                                <p className="text-xs text-gray-400">{formatSize(f.file_size_bytes ?? 0)}</p>
                             </div>
                             {!disabled && (
                                 <button
-                                    onClick={() => handleRemove(f.id)}
+                                    onClick={() => handleRemove(f)}
                                     className="text-gray-400 hover:text-red-500 p-1 min-w-[36px] min-h-[36px] flex items-center justify-center"
                                     aria-label="Remove file"
                                 >

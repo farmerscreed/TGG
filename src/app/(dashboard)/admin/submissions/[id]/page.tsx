@@ -18,7 +18,7 @@ export default async function AdminSubmissionDetailPage({ params }: PageProps) {
 
     const [
         { data: sub },
-        { data: files },
+        { data: fileRows },
         { data: scores },
     ] = await Promise.all([
         supabase
@@ -42,6 +42,16 @@ export default async function AdminSubmissionDetailPage({ params }: PageProps) {
     ])
 
     if (!sub) notFound()
+
+    // file_url holds the storage path (private bucket) — sign each so the links open.
+    const files = await Promise.all(
+        (fileRows ?? []).map(async f => {
+            const { data: signed } = await supabase.storage
+                .from('submission-files')
+                .createSignedUrl(f.file_url, 3600)
+            return { ...f, file_url: signed?.signedUrl ?? '' }
+        })
+    )
 
     const profile = sub.profiles as unknown as { first_name: string; last_name: string; university: string } | null
     const submitterName = profile ? `${profile.first_name ?? ''} ${profile.last_name ?? ''}`.trim() : '—'

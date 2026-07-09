@@ -31,11 +31,21 @@ export default async function JudgeScorePage({ params }: PageProps) {
 
     if (!submission) notFound()
 
-    // Get submission files
-    const { data: files } = await supabase
+    // Get submission files. file_url holds the storage path (private bucket),
+    // so mint a short-lived signed URL for each so the links actually open.
+    const { data: fileRows } = await supabase
         .from('submission_files')
         .select('id, file_name, file_url, file_type')
         .eq('submission_id', id)
+
+    const files = await Promise.all(
+        (fileRows ?? []).map(async f => {
+            const { data: signed } = await supabase.storage
+                .from('submission-files')
+                .createSignedUrl(f.file_url, 3600)
+            return { ...f, file_url: signed?.signedUrl ?? '' }
+        })
+    )
 
     // Get judging criteria
     const { data: criteria } = await supabase
