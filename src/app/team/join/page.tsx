@@ -33,7 +33,7 @@ export default async function TeamJoinPage({ searchParams }: PageProps) {
     // Look up invite by token
     const { data: invite } = await supabase
         .from('team_members')
-        .select('id, team_id, status, teams(name, team_lead_id)')
+        .select('id, team_id, status, teams(name, lead_user_id)')
         .eq('invite_token', token)
         .single()
 

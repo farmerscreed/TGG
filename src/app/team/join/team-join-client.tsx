@@ -11,7 +11,7 @@ interface Invite {
     id: string
     team_id: string
     status: string
-    teams: { name: string; team_lead_id: string } | null
+    teams: { name: string; lead_user_id: string } | null
 }
 
 interface TeamJoinClientProps {
@@ -68,7 +68,7 @@ export default function TeamJoinClient({ userId, userEmail, invite, token }: Tea
             .select('id')
             .eq('user_id', userId)
             .eq('status', 'accepted')
-            .single()
+            .maybeSingle()
 
         if (existingMembership) {
             setError('You are already a member of another team. You must leave that team before joining a new one.')

@@ -16,12 +16,14 @@ export default async function CoordinatorSubmissionsPage() {
 
     if (!role) redirect('/coordinator')
 
-    // Get submissions by participants from this university
+    // Get submissions by participants from this university. Embed profiles via
+    // the submissions.user_id -> profiles.user_id FK (submissions_profile_user_fkey);
+    // !inner so the university filter actually restricts the rows.
     const { data: submissions } = await supabase
         .from('submissions')
         .select(`
             id, reference_code, title, category, status, updated_at, is_locked,
-            profiles!submissions_user_id_fkey(first_name, last_name, university)
+            profiles!submissions_profile_user_fkey!inner(first_name, last_name, university)
         `)
         .eq('profiles.university', role.university)
         .order('updated_at', { ascending: false })

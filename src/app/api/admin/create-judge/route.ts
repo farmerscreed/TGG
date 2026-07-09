@@ -50,10 +50,10 @@ export async function POST(request: NextRequest) {
     const firstName = nameParts[0]
     const lastName = nameParts.slice(1).join(' ') || ''
     await supabase.from('profiles').upsert({
-        id: judgeId,
+        user_id: judgeId,
         first_name: firstName,
         last_name: lastName,
-    })
+    }, { onConflict: 'user_id' })
 
     // Send password setup link via Supabase
     await supabase.auth.admin.generateLink({

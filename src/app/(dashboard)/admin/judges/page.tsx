@@ -7,12 +7,28 @@ export default async function AdminJudgesPage() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) redirect('/login')
 
-    // Get all judges
-    const { data: judges } = await supabase
+    // Get all judges. user_roles and profiles share no direct FK (both point at
+    // auth.users), so fetch each and merge by id rather than embedding.
+    const { data: judgeRoles } = await supabase
         .from('user_roles')
-        .select('id, created_at, profiles!user_roles_id_fkey(first_name, last_name)')
+        .select('id, created_at')
         .eq('role', 'judge')
         .order('created_at', { ascending: false })
+
+    const judgeIds = (judgeRoles ?? []).map(r => r.id)
+    const { data: judgeProfiles } = judgeIds.length > 0
+        ? await supabase
+            .from('profiles')
+            .select('user_id, first_name, last_name')
+            .in('user_id', judgeIds)
+        : { data: [] }
+
+    const judgeProfileByUser = new Map((judgeProfiles ?? []).map(p => [p.user_id, p]))
+    const judges = (judgeRoles ?? []).map(r => ({
+        id: r.id,
+        created_at: r.created_at,
+        profiles: judgeProfileByUser.get(r.id) ?? null,
+    }))
 
     // Get all submitted submissions for assignment
     const { data: submissions } = await supabase

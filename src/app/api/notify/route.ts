@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
         if (!sub) return NextResponse.json({ error: 'Submission not found' }, { status: 404 })
 
         const { data: profile } = await supabase
-            .from('profiles').select('first_name, last_name').eq('id', sub.user_id).single()
+            .from('profiles').select('first_name, last_name').eq('user_id', sub.user_id).maybeSingle()
 
         const { data: authUser } = await supabase.auth.admin.getUserById(sub.user_id)
         if (!authUser?.user?.email) return NextResponse.json({ error: 'User email not found' }, { status: 404 })
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     else if (type === 'submission_received') {
         if (!recipientEmail) return NextResponse.json({ error: 'to is required' }, { status: 400 })
         const { data: profile } = await supabase
-            .from('profiles').select('first_name, last_name').eq('id', user.id).single()
+            .from('profiles').select('first_name, last_name').eq('user_id', user.id).maybeSingle()
 
         emailContent = emailTemplates.submissionReceived({
             name: `${profile?.first_name ?? ''} ${profile?.last_name ?? ''}`.trim() || 'Participant',
