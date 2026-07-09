@@ -50,22 +50,30 @@ export default async function JudgeScorePage({ params }: PageProps) {
     // Get judging criteria
     const { data: criteria } = await supabase
         .from('judging_criteria')
-        .select('*')
-        .order('order_index')
+        .select('id, name, description, max_points, weight')
+        .eq('is_active', true)
+        .order('display_order')
 
-    // Get existing scores for this judge
-    const { data: existingScores } = await supabase
-        .from('judging_scores')
-        .select('*')
+    // Get this judge's existing per-criterion scores for the submission and
+    // fold them into the shape the client expects.
+    const { data: scoreRows } = await supabase
+        .from('judge_scores')
+        .select('criterion_id, score, comments')
         .eq('submission_id', id)
         .eq('judge_id', user.id)
-        .maybeSingle()
+
+    const existingScores = (scoreRows && scoreRows.length > 0)
+        ? {
+            scores: Object.fromEntries(scoreRows.map(r => [r.criterion_id, Number(r.score)])),
+            comments: scoreRows.find(r => r.comments)?.comments ?? '',
+        }
+        : null
 
     // Check if judging is locked
     const { data: settings } = await supabase
         .from('challenge_settings')
         .select('judging_locked')
-        .single()
+        .maybeSingle()
 
     return (
         <JudgeScoringClient

@@ -10,6 +10,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { CheckCircle2, Loader2, Lock, Star, ExternalLink, FileText } from 'lucide-react'
+import { computeJudgeTotal } from '@/lib/scoring'
 
 interface Submission {
     id: string
@@ -28,15 +29,13 @@ interface Criterion {
     id: string
     name: string
     description: string
-    max_score: number
+    max_points: number
     weight: number
 }
 
 interface ExistingScores {
-    id: string
     scores: Record<string, number>
     comments: string
-    total_score: number
 }
 
 interface SubmissionFile {
@@ -68,10 +67,7 @@ export function JudgeScoringClient({
         setScores(s => ({ ...s, [criterionId]: score }))
     }
 
-    const totalScore = criteria.reduce((acc, c) => {
-        const s = scores[c.id] ?? 0
-        return acc + (s / c.max_score) * c.weight
-    }, 0)
+    const totalScore = computeJudgeTotal(scores, criteria)
 
     const allScored = criteria.every(c => scores[c.id] !== undefined)
 
@@ -81,21 +77,29 @@ export function JudgeScoringClient({
         setError(null)
         const supabase = createClient()
 
-        const payload = {
-            submission_id: submission.id,
-            judge_id: judgeId,
-            scores,
-            comments,
-            total_score: totalScore,
-        }
+        // One row per scored criterion; upsert on the (judge, submission,
+        // criterion) unique key so re-saving updates in place.
+        const rows = criteria
+            .filter(c => scores[c.id] !== undefined)
+            .map(c => ({
+                submission_id: submission.id,
+                judge_id: judgeId,
+                criterion_id: c.id,
+                score: scores[c.id],
+                comments,
+            }))
 
-        if (existingScores?.id) {
-            await supabase.from('judging_scores').update(payload).eq('id', existingScores.id)
-        } else {
-            await supabase.from('judging_scores').insert(payload)
-        }
+        const { error: saveError } = await supabase
+            .from('judge_scores')
+            .upsert(rows, { onConflict: 'judge_id,submission_id,criterion_id' })
 
         setSaving(false)
+
+        if (saveError) {
+            setError('Could not save your scores. Please try again.')
+            return
+        }
+
         if (submit) {
             router.push('/judge')
         } else {
@@ -217,16 +221,16 @@ export function JudgeScoringClient({
                                         <div>
                                             <p className="font-semibold text-sm text-[#1a1a1a]">{c.name}</p>
                                             <p className="text-xs text-gray-500">{c.description}</p>
-                                            <p className="text-xs text-gray-400">Weight: {c.weight}% · Max: {c.max_score} pts</p>
+                                            <p className="text-xs text-gray-400">Weight: {c.weight}% · Max: {c.max_points} pts</p>
                                         </div>
                                         <span className={`text-lg font-bold flex-shrink-0 ${score > 0 ? 'text-[#1a5c38]' : 'text-gray-300'}`}>
-                                            {score}/{c.max_score}
+                                            {score}/{c.max_points}
                                         </span>
                                     </div>
 
                                     {/* Star rating */}
                                     <div className="flex gap-1 flex-wrap">
-                                        {Array.from({ length: c.max_score }, (_, i) => i + 1).map(v => (
+                                        {Array.from({ length: c.max_points }, (_, i) => i + 1).map(v => (
                                             <button
                                                 key={v}
                                                 disabled={isLocked}
