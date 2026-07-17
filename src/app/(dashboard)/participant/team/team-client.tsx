@@ -45,6 +45,7 @@ export function TeamClient({ userId, userEmail, university, participationType, t
     const [creating, setCreating] = useState(false)
     const [inviting, setInviting] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [inviteSuccess, setInviteSuccess] = useState<string | null>(null)
     const [copied, setCopied] = useState<string | null>(null)
 
     const currentTeam = team as Team | null
@@ -75,18 +76,47 @@ export function TeamClient({ userId, userEmail, university, participationType, t
         if (acceptedCount >= MAX_TEAM_SIZE) { setError(`Maximum team size is ${MAX_TEAM_SIZE}.`); return }
         setInviting(true)
         setError(null)
+        setInviteSuccess(null)
         const supabase = createClient()
-        const { error: inviteError } = await supabase.from('team_members').insert({
-            team_id: currentTeam!.id,
-            invited_email: inviteEmail.trim(),
-            status: 'invited',
-        })
-        if (inviteError) {
-            setError('Invite failed: ' + inviteError.message)
-        } else {
-            setInviteEmail('')
-            router.refresh()
+        const email = inviteEmail.trim()
+
+        // Insert the invite and read back its auto-generated token.
+        const { data: inserted, error: inviteError } = await supabase
+            .from('team_members')
+            .insert({ team_id: currentTeam!.id, invited_email: email, status: 'invited' })
+            .select('invite_token')
+            .single()
+
+        if (inviteError || !inserted) {
+            setError('Invite failed: ' + (inviteError?.message ?? 'unknown error'))
+            setInviting(false)
+            return
         }
+
+        // Email the invitee their join link (best-effort — don't block on it).
+        try {
+            const inviteUrl = `${window.location.origin}/team/join?token=${inserted.invite_token}`
+            await fetch('/api/notify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: email,
+                    type: 'team_invite',
+                    payload: {
+                        inviteeName: email,
+                        teamName: currentTeam!.name,
+                        teamLeadName: userEmail,
+                        inviteUrl,
+                    },
+                }),
+            })
+        } catch {
+            // Email is best-effort; the invite link is still available to copy below.
+        }
+
+        setInviteEmail('')
+        setInviteSuccess(`Invitation sent to ${email}. They'll receive an email with a join link — you can also copy it from the members list above.`)
+        router.refresh()
         setInviting(false)
     }
 
@@ -255,8 +285,14 @@ export function TeamClient({ userId, userEmail, university, participationType, t
                                 >
                                     {inviting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Sending Invite…</> : 'Send Invite'}
                                 </Button>
+                                {inviteSuccess && (
+                                    <Alert className="border-green-200 bg-green-50">
+                                        <CheckCircle2 className="text-green-600" size={16} />
+                                        <AlertDescription className="text-green-700 text-sm ml-2">{inviteSuccess}</AlertDescription>
+                                    </Alert>
+                                )}
                                 <p className="text-xs text-gray-400 text-center">
-                                    An invite link will be generated. Share it or copy it from the members list above.
+                                    We&apos;ll email the invitee a join link. They must sign up (or log in) and accept it to join your team.
                                 </p>
                             </CardContent>
                         </Card>
