@@ -17,7 +17,7 @@ export default async function ParticipantDashboard() {
 
     const [{ data: profile }, { data: submission }, { data: team }, { data: notifications }] = await Promise.all([
         supabase.from('profiles').select('*, user_id').eq('user_id', user.id).single(),
-        supabase.from('submissions').select('*').eq('user_id', user.id).maybeSingle(),
+        supabase.from('submissions').select('*').eq('user_id', user.id).order('updated_at', { ascending: false }).limit(1).maybeSingle(),
         supabase.from('teams').select('*, team_members(*)').eq('lead_user_id', user.id).maybeSingle(),
         supabase.from('notifications').select('*').eq('user_id', user.id).eq('is_read', false).order('created_at', { ascending: false }).limit(5),
     ])
