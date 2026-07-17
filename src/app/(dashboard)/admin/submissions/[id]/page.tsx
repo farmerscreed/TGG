@@ -7,6 +7,7 @@ import { StatusBadge } from '@/components/shared/status-badge'
 import { ArrowLeft, FileText, User, ExternalLink, Star } from 'lucide-react'
 import type { SubmissionStatus } from '@/lib/constants'
 import { AdminSubmissionDetailActions } from './admin-submission-detail-actions'
+import { computeJudgeTotal, groupScoresByJudge } from '@/lib/scoring'
 
 interface PageProps { params: Promise<{ id: string }> }
 
@@ -18,8 +19,8 @@ export default async function AdminSubmissionDetailPage({ params }: PageProps) {
 
     const [
         { data: sub },
-        { data: files },
-        { data: scores },
+        { data: fileRows },
+        { data: scoreRows },
     ] = await Promise.all([
         supabase
             .from('submissions')
@@ -36,12 +37,36 @@ export default async function AdminSubmissionDetailPage({ params }: PageProps) {
             .select('id, file_name, file_url, file_type')
             .eq('submission_id', id),
         supabase
-            .from('judging_scores')
-            .select('id, total_score, comments, judge_id, created_at')
+            .from('judge_scores')
+            .select('judge_id, criterion_id, score, comments')
             .eq('submission_id', id),
     ])
 
     if (!sub) notFound()
+
+    // Fold per-criterion rows into one weighted total per judge.
+    const { data: criteria } = await supabase
+        .from('judging_criteria')
+        .select('id, max_points, weight')
+        .eq('is_active', true)
+
+    const scores = Array.from(
+        groupScoresByJudge(scoreRows ?? []).entries()
+    ).map(([judge_id, judgeScores]) => ({
+        id: judge_id,
+        total_score: computeJudgeTotal(judgeScores, criteria ?? []),
+        comments: (scoreRows ?? []).find(r => r.judge_id === judge_id && r.comments)?.comments ?? null,
+    }))
+
+    // file_url holds the storage path (private bucket) — sign each so the links open.
+    const files = await Promise.all(
+        (fileRows ?? []).map(async f => {
+            const { data: signed } = await supabase.storage
+                .from('submission-files')
+                .createSignedUrl(f.file_url, 3600)
+            return { ...f, file_url: signed?.signedUrl ?? '' }
+        })
+    )
 
     const profile = sub.profiles as unknown as { first_name: string; last_name: string; university: string } | null
     const submitterName = profile ? `${profile.first_name ?? ''} ${profile.last_name ?? ''}`.trim() : '—'

@@ -50,6 +50,7 @@ export function SubmissionFormClient({
     const [saving, setSaving] = useState(false)
     const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
     const [submitting, setSubmitting] = useState(false)
+    const [submittedCode, setSubmittedCode] = useState<string | null>(null)
     const [error, setError] = useState<string | null>(null)
     const [submissionId, setSubmissionId] = useState<string | null>((sub?.id as string) ?? null)
 
@@ -158,7 +159,9 @@ export function SubmissionFormClient({
             return
         }
 
-        // Fire confirmation email (best-effort, don't block navigation)
+        const refCode = updated?.reference_code ?? (sub?.reference_code as string) ?? ''
+
+        // Fire confirmation email (best-effort, don't block the success screen)
         try {
             await fetch('/api/notify', {
                 method: 'POST',
@@ -167,7 +170,7 @@ export function SubmissionFormClient({
                     to: userEmail,
                     type: 'submission_received',
                     payload: {
-                        referenceCode: updated?.reference_code ?? '',
+                        referenceCode: refCode,
                         title: formData.title,
                     },
                 }),
@@ -177,10 +180,48 @@ export function SubmissionFormClient({
         }
 
         setSubmitting(false)
-        router.push('/participant?submitted=1')
+        // Show an explicit confirmation instead of a silent redirect.
+        setSubmittedCode(refCode)
     }
 
     const progressPct = ((step - 1) / (TOTAL_STEPS - 1)) * 100
+
+    // Confirmation screen shown after a successful submit.
+    if (submittedCode) {
+        return (
+            <div className="max-w-[480px] mx-auto">
+                <div className="bg-white rounded-2xl shadow-xl p-8 text-center space-y-4">
+                    <div className="flex justify-center">
+                        <div className="w-20 h-20 rounded-full bg-[#e8f5e9] flex items-center justify-center">
+                            <CheckCircle2 className="w-10 h-10 text-[#1a5c38]" />
+                        </div>
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold text-[#1a1a1a]">Submission received!</h2>
+                        <p className="text-gray-500 text-sm mt-1">
+                            Your entry for the Campus Eco-Challenge 2026 has been submitted successfully.
+                        </p>
+                    </div>
+                    {submittedCode && (
+                        <div className="bg-[#e8f5e9] border border-[#1a5c38]/20 rounded-xl px-5 py-4">
+                            <p className="text-xs text-[#1a5c38]/70 mb-1">Your reference number</p>
+                            <p className="text-lg font-bold font-mono text-[#1a5c38]">{submittedCode}</p>
+                        </div>
+                    )}
+                    <p className="text-xs text-gray-400">
+                        A confirmation email has been sent. Keep your reference number for your records.
+                        Your submission is now locked; contact a coordinator if you need changes.
+                    </p>
+                    <Button
+                        onClick={() => router.push('/participant')}
+                        className="w-full h-12 bg-[#1a5c38] hover:bg-[#154d30] text-white font-semibold"
+                    >
+                        Back to Dashboard
+                    </Button>
+                </div>
+            </div>
+        )
+    }
 
     if (!isOpen && !sub) {
         return (

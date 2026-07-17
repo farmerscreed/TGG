@@ -45,10 +45,10 @@ export async function POST(request: NextRequest) {
     // Create profile
     const nameParts = name.trim().split(' ')
     await supabase.from('profiles').upsert({
-        id: coordId,
+        user_id: coordId,
         first_name: nameParts[0],
         last_name: nameParts.slice(1).join(' ') || '',
-    })
+    }, { onConflict: 'user_id' })
 
     // Send welcome email
     await sendEmail({

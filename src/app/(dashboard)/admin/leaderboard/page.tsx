@@ -5,31 +5,39 @@ import { Badge } from '@/components/ui/badge'
 import { Trophy, Medal, Award } from 'lucide-react'
 import { StatusBadge } from '@/components/shared/status-badge'
 import type { SubmissionStatus } from '@/lib/constants'
+import { computeJudgeTotal } from '@/lib/scoring'
 
 export default async function AdminLeaderboardPage() {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) redirect('/login')
 
-    // Get scored submissions ordered by average score descending
-    const { data: scores } = await supabase
-        .from('judging_scores')
-        .select('submission_id, total_score')
-        .order('total_score', { ascending: false })
+    // Load all per-criterion scores + the criteria, then compute each judge's
+    // weighted total and average those per submission.
+    const [{ data: scoreRows }, { data: criteria }] = await Promise.all([
+        supabase.from('judge_scores').select('submission_id, judge_id, criterion_id, score'),
+        supabase.from('judging_criteria').select('id, max_points, weight').eq('is_active', true),
+    ])
 
-    // Group by submission, average the scores
-    const submissionScores = new Map<string, number[]>()
-    scores?.forEach(s => {
-        if (!submissionScores.has(s.submission_id)) submissionScores.set(s.submission_id, [])
-        submissionScores.get(s.submission_id)!.push(s.total_score)
-    })
+    // submission_id -> judge_id -> { criterion_id: score }
+    const bySubmission = new Map<string, Map<string, Record<string, number>>>()
+    for (const r of scoreRows ?? []) {
+        const judges = bySubmission.get(r.submission_id) ?? new Map<string, Record<string, number>>()
+        const criterionScores = judges.get(r.judge_id) ?? {}
+        criterionScores[r.criterion_id] = Number(r.score)
+        judges.set(r.judge_id, criterionScores)
+        bySubmission.set(r.submission_id, judges)
+    }
 
-    const ranked = Array.from(submissionScores.entries())
-        .map(([id, sc]) => ({
-            id,
-            avg: sc.reduce((a, b) => a + b, 0) / sc.length,
-            count: sc.length,
-        }))
+    const ranked = Array.from(bySubmission.entries())
+        .map(([id, judges]) => {
+            const totals = Array.from(judges.values()).map(js => computeJudgeTotal(js, criteria ?? []))
+            return {
+                id,
+                avg: totals.reduce((a, b) => a + b, 0) / totals.length,
+                count: totals.length,
+            }
+        })
         .sort((a, b) => b.avg - a.avg)
 
     // Fetch submission details

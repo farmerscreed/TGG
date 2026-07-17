@@ -31,31 +31,49 @@ export default async function JudgeScorePage({ params }: PageProps) {
 
     if (!submission) notFound()
 
-    // Get submission files
-    const { data: files } = await supabase
+    // Get submission files. file_url holds the storage path (private bucket),
+    // so mint a short-lived signed URL for each so the links actually open.
+    const { data: fileRows } = await supabase
         .from('submission_files')
         .select('id, file_name, file_url, file_type')
         .eq('submission_id', id)
 
+    const files = await Promise.all(
+        (fileRows ?? []).map(async f => {
+            const { data: signed } = await supabase.storage
+                .from('submission-files')
+                .createSignedUrl(f.file_url, 3600)
+            return { ...f, file_url: signed?.signedUrl ?? '' }
+        })
+    )
+
     // Get judging criteria
     const { data: criteria } = await supabase
         .from('judging_criteria')
-        .select('*')
-        .order('order_index')
+        .select('id, name, description, max_points, weight')
+        .eq('is_active', true)
+        .order('display_order')
 
-    // Get existing scores for this judge
-    const { data: existingScores } = await supabase
-        .from('judging_scores')
-        .select('*')
+    // Get this judge's existing per-criterion scores for the submission and
+    // fold them into the shape the client expects.
+    const { data: scoreRows } = await supabase
+        .from('judge_scores')
+        .select('criterion_id, score, comments')
         .eq('submission_id', id)
         .eq('judge_id', user.id)
-        .maybeSingle()
+
+    const existingScores = (scoreRows && scoreRows.length > 0)
+        ? {
+            scores: Object.fromEntries(scoreRows.map(r => [r.criterion_id, Number(r.score)])),
+            comments: scoreRows.find(r => r.comments)?.comments ?? '',
+        }
+        : null
 
     // Check if judging is locked
     const { data: settings } = await supabase
         .from('challenge_settings')
         .select('judging_locked')
-        .single()
+        .maybeSingle()
 
     return (
         <JudgeScoringClient

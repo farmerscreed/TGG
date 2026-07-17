@@ -14,7 +14,12 @@ export default async function CoordinatorDashboard() {
 
     const [{ count: partCount }, { count: subCount }] = await Promise.all([
         supabase.from('user_roles').select('*', { count: 'exact', head: true }).eq('role', 'participant').eq('university', university),
-        supabase.from('submissions').select('user_roles!inner(*)', { count: 'exact', head: true }).neq('status', 'draft'),
+        // Non-draft submissions from this university's participants, joined to
+        // profiles (submissions_profile_user_fkey) and filtered by university.
+        supabase.from('submissions')
+            .select('id, profiles!submissions_profile_user_fkey!inner(university)', { count: 'exact', head: true })
+            .eq('profiles.university', university)
+            .neq('status', 'draft'),
     ])
 
     return (

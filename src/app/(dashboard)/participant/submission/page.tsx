@@ -8,13 +8,13 @@ export default async function SubmissionPage() {
     if (!user) redirect('/login')
 
     const [{ data: submission }, { data: categories }, { data: profile }] = await Promise.all([
-        supabase.from('submissions').select('*, submission_files(*)').eq('user_id', user.id).single(),
+        supabase.from('submissions').select('*, submission_files(*)').eq('user_id', user.id).maybeSingle(),
         supabase.from('challenge_categories').select('*').eq('is_active', true).order('display_order'),
-        supabase.from('profiles').select('participation_type, university').eq('user_id', user.id).single(),
+        supabase.from('profiles').select('participation_type, university').eq('user_id', user.id).maybeSingle(),
     ])
 
     // Challenge settings
-    const { data: settings } = await supabase.from('challenge_settings').select('*').single()
+    const { data: settings } = await supabase.from('challenge_settings').select('*').maybeSingle()
 
     const now = new Date()
     const submissionOpen = settings?.submission_open ? new Date(settings.submission_open) : null
