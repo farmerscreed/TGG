@@ -8,7 +8,9 @@ export default async function SubmissionPage() {
     if (!user) redirect('/login')
 
     const [{ data: submission }, { data: categories }, { data: profile }] = await Promise.all([
-        supabase.from('submissions').select('*, submission_files(*)').eq('user_id', user.id).maybeSingle(),
+        // A unique constraint enforces one submission per user, but order+limit
+        // keeps this resilient (always loads the latest) even if that ever changes.
+        supabase.from('submissions').select('*, submission_files(*)').eq('user_id', user.id).order('updated_at', { ascending: false }).limit(1).maybeSingle(),
         supabase.from('challenge_categories').select('*').eq('is_active', true).order('display_order'),
         supabase.from('profiles').select('participation_type, university').eq('user_id', user.id).maybeSingle(),
     ])
