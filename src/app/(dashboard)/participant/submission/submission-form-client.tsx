@@ -429,10 +429,16 @@ export function SubmissionFormClient({
             {/* STEP 5: Supporting Materials */}
             {step === 5 && submissionId && (
                 <div className="space-y-4">
+                    <Alert className="border-[#1a5c38]/30 bg-[#e8f5e9]">
+                        <Info className="text-[#1a5c38]" size={16} />
+                        <AlertDescription className="text-[#1a5c38] text-sm ml-2">
+                            Everything on this step is <strong>optional</strong>. You can tap <strong>Next</strong> and submit without uploading any documents, photos, or a video link.
+                        </AlertDescription>
+                    </Alert>
                     <Card>
                         <CardHeader>
-                            <CardTitle className="text-base">Documents</CardTitle>
-                            <p className="text-sm text-gray-500">Upload supporting documents (max 3, PDF/Word/PPT, up to 10MB each)</p>
+                            <CardTitle className="text-base">Documents <span className="text-sm font-normal text-gray-400">(Optional)</span></CardTitle>
+                            <p className="text-sm text-gray-500">Optional supporting documents such as a proposal, concept note, or slides (max 3, PDF/Word/PPT, up to 10MB each). You can skip this.</p>
                         </CardHeader>
                         <CardContent>
                             <FileUpload
@@ -451,8 +457,8 @@ export function SubmissionFormClient({
 
                     <Card>
                         <CardHeader>
-                            <CardTitle className="text-base">Photos / Images</CardTitle>
-                            <p className="text-sm text-gray-500">Upload project photos (max 5, JPG/PNG, up to 5MB each)</p>
+                            <CardTitle className="text-base">Photos / Images <span className="text-sm font-normal text-gray-400">(Optional)</span></CardTitle>
+                            <p className="text-sm text-gray-500">Optional project photos (max 5, JPG/PNG, up to 5MB each). You can skip this.</p>
                         </CardHeader>
                         <CardContent>
                             <FileUpload
@@ -505,13 +511,16 @@ export function SubmissionFormClient({
                                 ['Project Title', formData.title || '—'],
                                 ['Category', formData.category || '—'],
                                 ['Custom Category', formData.category === 'Other' ? formData.custom_category || '—' : null],
-                                ['Video Link', formData.video_link || 'Not provided'],
-                            ].filter(([, v]) => v !== null).map(([label, value]) => (
-                                <div key={label as string} className="grid grid-cols-[120px_1fr] gap-2 text-sm border-b border-gray-100 pb-3 last:border-0">
-                                    <span className="text-gray-500 font-medium">{label}</span>
-                                    <span className="text-[#1a1a1a]">{value}</span>
-                                </div>
-                            ))}
+                                ['Video Link', formData.video_link || 'Not provided — optional, safe to submit without'],
+                            ].filter(([, v]) => v !== null).map(([label, value]) => {
+                                const isEmptyOptional = label === 'Video Link' && !formData.video_link
+                                return (
+                                    <div key={label as string} className="grid grid-cols-[120px_1fr] gap-2 text-sm border-b border-gray-100 pb-3 last:border-0">
+                                        <span className="text-gray-500 font-medium">{label}</span>
+                                        <span className={isEmptyOptional ? 'text-gray-400 italic' : 'text-[#1a1a1a]'}>{value}</span>
+                                    </div>
+                                )
+                            })}
 
                             {/* Text fields preview */}
                             {[
@@ -537,6 +546,7 @@ export function SubmissionFormClient({
                             <div className="text-sm">
                                 <span className="text-gray-500 font-medium">Files uploaded:</span>{' '}
                                 <span className="text-[#1a1a1a]">{uploadedFiles.length}</span>
+                                {uploadedFiles.length === 0 && <span className="text-gray-400 italic">{' '}— optional, safe to submit without</span>}
                             </div>
                         </CardContent>
                     </Card>
